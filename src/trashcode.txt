@@ -1,0 +1,20 @@
+ <div className="level" style={{ marginTop: '20px' }} >
+	    <div className="column">
+			<Col sm={6}>
+				<img src={StarRating} alt="star Rating"/>
+			</Col>
+			<Col sm={4}>
+				<table className="table scorebox card" style={{ padding: '0!important', width:'100%' }} >
+        <tbody>
+					<tr><th style={{ backgroundColor: '#cc0000', color:'white', textAlign: 'center', width: '50%' }} > Last Year </th>
+					<th style={{ backgroundColor: '#cc0000', color:'white', textAlign: 'center', width: '50%' }} >Current Year</th>
+					</tr>
+					<tr>
+          <td style={{ fontSize:'3em', textAlign: 'center', color: '#cc0000' }} >  </td>
+					<td style={{ fontSize:'3em', textAlign: 'center', color: '#cc0000' }} >  </td>
+					</tr>
+          </tbody>
+				</table>
+			</Col>
+    </div>
+    </div>

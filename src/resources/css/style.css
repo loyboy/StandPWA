@@ -1,0 +1,49 @@
+.numbers{
+	background-color:#404E67; 
+	color:white; 
+	border-radius:50%; 
+	padding:10px;	
+}
+.headers{
+	font-weight:900;
+}
+select{
+	border-radius:10px; 
+	padding:5px;
+}
+
+.score{
+
+color:#0070c0;
+text-align:center;
+font-size:3em;
+}
+
+.scorebox{
+height:150px;	
+background-color:white;
+
+}
+h4{
+	background-color:#0070c0;
+	color:white;
+	border-bottom:solid 2px white;
+	min-height:50px;
+	padding:5px;
+	margin:0;
+	text-align:center;
+	font-size:1em;
+}
+#star{
+	
+color:gold;
+font-size:6em;
+}
+
+#schoolgraph{
+	width:90%;
+	height:auto;
+	margin-left:5% !important;
+	margin-right:5% !important;
+	
+}
