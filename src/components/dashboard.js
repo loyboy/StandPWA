@@ -13,6 +13,12 @@ import TotalGamesModal from './modal/totalgames'
 import TotalOtherModal from './modal/totalothers'
 import TotalDomainModal from './modal/totaldomain'
 import TotalSocialModal from './modal/totalsocials'
+import SusAcademicModal from './modal/susacademic'
+import SusNonAcademicModal from './modal/susnonacademic'
+import SusGovernModal from './modal/susgovern'
+import SusPolicyModal from './modal/suspolicies'
+import SusRecordModal from './modal/susrecords'
+import SusTechModal from './modal/sustechnology'
 import AlertModal from './alert'
 import Parent from './parent'
 import {Container,Row,Col,Form} from 'react-bootstrap';
@@ -177,7 +183,18 @@ handleCore3(e) {
 handleClose = (e) => {
   if (e && e.preventDefault) e.preventDefault();
   console.log("Core values Changed");
-  this.setState({ modalcore: '', modalcoree: '',  modalcoreee: '', showalert: false,  modalinst: '', modallearn1: '', modallearn2: '', modallearn3: '', modallearn4: '' });
+  this.setState({ modalcore: '', modalcoree: '',  modalcoreee: '', showalert: false,  modalinst: '', modallearn1: '', modallearn2: '', modallearn3: '', modallearn4: '',
+      modaltotal1:'',
+      modaltotal2:'',
+      modaltotal3:'',
+      modaltotal4:'',
+      modalsus1:'',
+      modalsus2:'',
+      modalsus3:'',
+      modalsus4:'',
+      modalsus5:'',
+      modalsus6:'',
+});
 
 }
 
@@ -1418,16 +1435,16 @@ saveSustain2 = (e) => {
       }
      else { att23 = 0; }
 
-    total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6) + parseInt(att7) + parseInt(att8) + parseInt(att9) + parseInt(att10) + parseInt(att11) + parseInt(att12) + parseInt(att13) + parseInt(att14) + parseInt(att15) ;
+    total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6) + parseInt(att7) + parseInt(att8) + parseInt(att9) + parseInt(att10) + parseInt(att11) + parseInt(att12) + parseInt(att13) + parseInt(att14) + parseInt(att15) + parseInt(att16) + parseInt(att17) + parseInt(att18) + parseInt(att19) + parseInt(att20) + parseInt(att21) + parseInt(att22) + parseInt(att23) ;
     console.log('The Total: ' + total);
 
-    let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15 };
+    let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15, att_16: att16, att_17: att17, att_18: att18, att_19: att19, att_20: att20, att_21: att21, att_22: att22, att_23: att23 };
     let coreval = JSON.stringify(corearray);
 
     cookie.setItem(name,coreval);//for cookie
     this.setState({ sustain3: corearray });//for state
 
-    alert("Total Human Dev. games & sports Data has been saved... :-) ")
+    alert("Sustain policy Data has been saved... :-) ")
     }
 
 
@@ -1470,6 +1487,89 @@ saveSustain4 = (e) => {
   alert("Sustainabilty Records Data has been saved... :-) ")
   }
 
+  saveSustain5 = (e) => {
+    let name = this.state.job_id + "#sustain#technology";
+
+    let att1, att2 , att3, att4, att5, att6 = 0;
+    let total = 0;
+
+    if(this.state.sustain5 && this.state.sustain5.att_1 !== undefined ) {
+         att1 = parseInt(this.state.sustain5.att_1)
+    }
+       else { att1 = 0; }
+    if(this.state.sustain5 && this.state.sustain5.att_2 !== undefined) {
+         att2 = parseInt(this.state.sustain5.att_2)
+    }
+        else { att2 = 0; }
+    if(this.state.sustain5 && this.state.sustain5.att_3 !== undefined) {
+         att3 = parseInt(this.state.sustain5.att_3)
+        }
+        else { att3 = 0; }
+    if(this.state.sustain5 && this.state.sustain5.att_4 !== undefined) {
+          att4 = parseInt(this.state.sustain5.att_4)
+        }
+        else { att4 = 0; }
+    if(this.state.sustain5 && this.state.sustain5.att_5 !== undefined) {
+          att5 = parseInt(this.state.sustain5.att_5)
+          }
+        else { att5 = 0; }
+    if(this.state.sustain5 && this.state.sustain5.att_6 !== undefined) {
+          att6 = parseInt(this.state.sustain5.att_6)
+          }
+    else { att6 = 0; }
+
+    total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6)
+    console.log('The Total: ' + total);
+
+    let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
+    let coreval = JSON.stringify(corearray);
+
+    cookie.setItem(name,coreval);//for cookie
+    this.setState({ sustain5: corearray });//for state
+
+    alert("Sustainabilty Technology Data has been saved... :-) ")
+    }
+
+    saveSustain6 = (e) => {
+      let name = this.state.job_id + "#sustain#governance";
+
+      let att1, att2 , att3, att4, att5 = 0;
+      let total = 0;
+
+      if(this.state.sustain6 && this.state.sustain6.att_1 !== undefined ) {
+           att1 = parseInt(this.state.sustain6.att_1)
+      }
+         else { att1 = 0; }
+      if(this.state.sustain6 && this.state.sustain6.att_2 !== undefined) {
+           att2 = parseInt(this.state.sustain6.att_2)
+      }
+          else { att2 = 0; }
+      if(this.state.sustain6 && this.state.sustain6.att_3 !== undefined) {
+           att3 = parseInt(this.state.sustain6.att_3)
+          }
+          else { att3 = 0; }
+      if(this.state.sustain6 && this.state.sustain6.att_4 !== undefined) {
+            att4 = parseInt(this.state.sustain6.att_4)
+          }
+          else { att4 = 0; }
+      if(this.state.sustain6 && this.state.sustain6.att_5 !== undefined) {
+            att5 = parseInt(this.state.sustain6.att_5)
+            }
+          else { att5 = 0; }
+
+
+      total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5);
+      console.log('The Total: ' + total);
+
+      let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
+      let coreval = JSON.stringify(corearray);
+
+      cookie.setItem(name,coreval);//for cookie
+      this.setState({ sustain6: corearray });//for state
+
+      alert("Sustainabilty Governance Data has been saved... :-) ")
+      }
+
 
 //Sustainability.........
 
@@ -1477,7 +1577,8 @@ saveSustain4 = (e) => {
 render() {
   const {
    modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 ,
-   modaltotal1, modaltotal2, modaltotal3, modaltotal4
+   modaltotal1, modaltotal2, modaltotal3, modaltotal4,
+   modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6
   } = this.state;
 
 //Load all jobs for the logged user....
@@ -1487,7 +1588,7 @@ let joblist = JSON.parse(cookie.getItem(name));
 
 //load all scores based on JOB_ID---Core Processes Attendance
 //Core Processes--------------------------------
-let totalcoreatt = 0 //attendance in Core processes
+let totalcoreatt = 0 //attendance in Core processesf
 if (this.state.job_id !== ''){
   let name = this.state.job_id + "#core#coreattendance";
   let core_att = JSON.parse(cookie.getItem(name));
@@ -1622,6 +1723,67 @@ let totalapex = 0
 totalapex = totaltotal1 + totaltotal2 + totaltotal3 + totaltotal4;
 //end total dev env
 
+//Sustainability
+let totalsus1 = 0 //
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#academic";
+  let total1 = JSON.parse(cookie.getItem(name));
+
+  for (var key in total1) {
+    totalsus1 += total1[key];
+  }
+}
+
+let totalsus2 = 0 //
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#nonacademic";
+  let total2 = JSON.parse(cookie.getItem(name));
+  for (var key in total2) {
+    totalsus2 += total2[key];
+  }
+}
+
+let totalsus3 = 0
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#policy";
+  let total3 = JSON.parse(cookie.getItem(name));
+  for (var key in total3) {
+    totalsus3 += total3[key];
+  }
+}
+
+let totalsus4 = 0
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#records";
+  let total4 = JSON.parse(cookie.getItem(name));
+  for (var key in total4) {
+    totalsus4 += total4[key];
+  }
+}
+
+let totalsus5 = 0
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#technology";
+  let total5 = JSON.parse(cookie.getItem(name));
+  for (var key in total5) {
+    totalsus5 += total5[key];
+  }
+}
+
+let totalsus6 = 0
+if (this.state.job_id !== ''){
+  let name = this.state.job_id + "#sustain#governance";
+  let total6 = JSON.parse(cookie.getItem(name));
+  for (var key in total6) {
+    totalsus6 += total6[key];
+  }
+}
+
+let sustainapex = 0
+sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totalsus6;
+
+//end Sustainability
+
   return (
   <Protected>
     <UserLayout>
@@ -1696,12 +1858,12 @@ totalapex = totaltotal1 + totaltotal2 + totaltotal3 + totaltotal4;
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Sustainability</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic) >>  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) >>  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy >>  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records >>  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology >>  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance >>  score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic) >> {totalsus1} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) >> {totalsus2} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy >> {totalsus3}  score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records >> {totalsus4} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology >> {totalsus5} score </button> &nbsp;&nbsp;&nbsp; <br/>
+          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance >> {totalsus6}  score </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -1738,6 +1900,14 @@ totalapex = totaltotal1 + totaltotal2 + totaltotal3 + totaltotal4;
      <TotalOtherModal active = {modaltotal2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal2.bind(this)} saveform={this.saveTotal2.bind(this)} totalother={this.state.student2} />
      <TotalSocialModal active = {modaltotal3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal3.bind(this)} saveform={this.saveTotal3.bind(this)} totalsocials={this.state.student3} />
      <TotalDomainModal active = {modaltotal4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal4.bind(this)} saveform={this.saveTotal4.bind(this)} totaldomain={this.state.student4} />
+
+
+     <SusAcademicModal active = {modalsus1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus1.bind(this)} saveform={this.saveSustain1.bind(this)} sustain={this.state.sustain1} />
+     <SusNonAcademicModal active = {modalsus2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus2.bind(this)} saveform={this.saveSustain2.bind(this)} sustain={this.state.sustain2} />
+     <SusPolicyModal active = {modalsus3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus3.bind(this)} saveform={this.saveSustain3.bind(this)} sustain={this.state.sustain3} />
+     <SusRecordModal active = {modalsus4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus4.bind(this)} saveform={this.saveSustain4.bind(this)} sustain={this.state.sustain4} />
+     <SusTechModal active = {modalsus5} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus5.bind(this)} saveform={this.saveSustain5.bind(this)} sustain={this.state.sustain5} />
+     <SusGovernModal active = {modalsus6} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus6.bind(this)} saveform={this.saveSustain6.bind(this)} sustain={this.state.sustain6} />
 
     </UserLayout>
   </Protected>
