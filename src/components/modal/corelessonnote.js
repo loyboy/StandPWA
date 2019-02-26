@@ -14,10 +14,10 @@ export default class CoreLsnModal extends React.PureComponent {
         </header>
         <section className="modal-card-body">
 
-        <div class="field">
-          <label class="label">Operation? </label>
-          <p class=" help">Does the school operate lesson note?</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Operation? </label>
+          <p className=" help">Does the school operate lesson note?</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_1 : ''}>
               <option value=''>Choose---</option>
@@ -28,10 +28,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Consistency ? </label>
-          <p class="help">Was lesson note operated consistently during the last term over the last term?</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Consistency ? </label>
+          <p className="help">Was lesson note operated consistently during the last term over the last term?</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_2 : ''}>
               <option value=''>Choose---</option>
@@ -43,10 +43,10 @@ export default class CoreLsnModal extends React.PureComponent {
         </div>
 
 
-        <div class="field">
-          <label class="label">Frequency ? </label>
-          <p class="help">What is the lessons note cycle practiced by the school?</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Frequency ? </label>
+          <p className="help">What is the lessons note cycle practiced by the school?</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_3 : ''}>
               <option value=''>Choose---</option>
@@ -60,10 +60,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Implementation ? </label>
-          <p class="help">Access implementation as in functional, sustainable, professional? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Implementation ? </label>
+          <p className="help">Access implementation as in functional, sustainable, professional? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_4 : ''}>
               <option value=''>Choose---</option>
@@ -74,10 +74,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Record ? </label>
-          <p class="help">Is lessons note kept for reference and possible reuse? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Record ? </label>
+          <p className="help">Is lessons note kept for reference and possible reuse? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_5 : ''}>
               <option value=''>Choose---</option>
@@ -88,10 +88,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Supervision ? </label>
-          <p class="help">Evidence of supervision of lessons note operation? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Supervision ? </label>
+          <p className="help">Evidence of supervision of lessons note operation? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_6 : ''}>
               <option value=''>Choose---</option>
@@ -102,10 +102,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Performance? </label>
-          <p class="help">How good is the performance of this school? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Performance? </label>
+          <p className="help">How good is the performance of this school? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_7" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_7 : ''}>
               <option value=''>Choose---</option>
@@ -119,10 +119,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Timing ? </label>
-          <p class="help">Are submissions and approvals within the stipulated days by school policy or tradition? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Timing ? </label>
+          <p className="help">Are submissions and approvals within the stipulated days by school policy or tradition? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_8" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_8 : ''}>
               <option value=''>Choose---</option>
@@ -133,10 +133,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Quality? </label>
-          <p class="help">Are submissions and approvals within the stipulated days by school policy or tradition? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Quality? </label>
+          <p className="help">Are submissions and approvals within the stipulated days by school policy or tradition? </p>
+          <div className="control">
           <div className="select is-large">
 
             <select name="att_9" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_9 : ''}>
@@ -150,10 +150,10 @@ export default class CoreLsnModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Completion? </label>
-          <p class="help">Are completion within times </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Completion? </label>
+          <p className="help">Are completion within times </p>
+          <div className="control">
           <div className="select is-large">
 
           <select name="att_10" onChange={handleInputChange} value= {coreprocess2 !== null ? coreprocess2.att_10 : ''}>

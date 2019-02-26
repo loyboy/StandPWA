@@ -21,10 +21,42 @@ export default class AcaInternalModal extends React.PureComponent {
           <p className=" help"> Aggregate scores and average them for a single figure of performance? </p>
           <div className="control">
           <div className="select is-large">
-            <select name="att_1" onChange={handleInputChange} value= {sustain !== null ? sustain.att_1 : ''}>
+            <select name="att_1" onChange={handleInputChange} value= {academic !== null ? academic.att_1 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Gross Actual</option>
-              <option value='0'>No</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
+            </select>
+          </div>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Home Work Score  </label>
+          <p className=" help"> Aggregate scores and average them for a single figure of performance </p>
+          <div className="control">
+          <div className="select is-large">
+            <select name="att_2" onChange={handleInputChange} value= {academic !== null ? academic.att_2 : ''}>
+              <option value=''>Choose---</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
+            </select>
+          </div>
+          </div>
+        </div>
+
+
+        <div className="field">
+          <label className="label">  Test Score </label>
+          <p className=" help"> Aggregate scores and average them for a single figure of performance </p>
+          <div className="control">
+          <div className="select is-large">
+            <select name="att_3" onChange={handleInputChange} value= {academic !== null ? academic.att_3 : ''}>
+              <option value=''>Choose---</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
 
             </select>
           </div>
@@ -32,57 +64,47 @@ export default class AcaInternalModal extends React.PureComponent {
         </div>
 
         <div className="field">
-          <label className="label">Safety of records against degradation and loss? </label>
-          <p className=" help"> Is the resource reasonably protected from degradation and damage? </p>
+          <label className="label"> Mid Term ? </label>
+          <p className=" help"> There should be a mid-term test for every full term </p>
           <div className="control">
           <div className="select is-large">
-            <select name="att_2" onChange={handleInputChange} value= {sustain !== null ? sustain.att_2 : ''}>
+            <select name="att_4" onChange={handleInputChange} value= {academic !== null ? academic.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
-              <option value='0'>No</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
+            </select>
+          </div>
+          </div>
+        </div>
+
+
+
+        <div className="field">
+          <label className="label">Terminal Exam ? </label>
+          <p className=" help"> There should be terminal exam for every completed term </p>
+          <div className="control">
+          <div className="select is-large">
+            <select name="att_5" onChange={handleInputChange} value= {academic !== null ? academic.att_5 : ''}>
+              <option value=''>Choose---</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
             </select>
           </div>
           </div>
         </div>
 
         <div className="field">
-          <label className="label"> Security against theft and tamper ? </label>
-          <p className=" help"> Is there reasonable protection from theft, tampering and compromising? </p>
+          <label className="label">Terminal Exam Score ? </label>
+          <p className=" help"> Aggregate scores and average them for a single figure of performance </p>
           <div className="control">
           <div className="select is-large">
-            <select name="att_3" onChange={handleInputChange} value= {sustain !== null ? sustain.att_3 : ''}>
+            <select name="att_6" onChange={handleInputChange} value= {academic !== null ? academic.att_6 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
-              <option value='0'>No</option>
-            </select>
-          </div>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label">  Accessibility  </label>
-          <p className=" help"> Is record accessible, searchable and reusable? </p>
-          <div className="control">
-          <div className="select is-large">
-            <select name="att_4" onChange={handleInputChange} value= {sustain !== null ? sustain.att_4 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
-              <option value='0'>No</option>
-
-            </select>
-          </div>
-          </div>
-        </div>
-
-        <div className="field">
-          <label className="label"> Recoverability ? </label>
-          <p className=" help"> Is there provision for disaster recovery? </p>
-          <div className="control">
-          <div className="select is-large">
-            <select name="att_5" onChange={handleInputChange} value= {sustain !== null ? sustain.att_5 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
-              <option value='0'>No</option>
+              <option value='3'>Excellent</option>
+              <option value='2'>Good</option>
+              <option value='1'>Bad</option>
             </select>
           </div>
           </div>

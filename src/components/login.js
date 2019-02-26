@@ -93,7 +93,7 @@ export default class Login extends React.Component {
           let userval = JSON.stringify(response.data.users);
           cookie.setItem('user_logged', 'yes' );
           cookie.setItem('users', userval );
-          console.log(userval);
+          console.log("User Login Page: "+ userval);
           this.setState({
             loggedIn: true,
           });

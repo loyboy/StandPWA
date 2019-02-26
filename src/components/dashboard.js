@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Protected from './protected';
 import UserLayout from './user-layout';
 import CoreAttModal from './modal/coreattendance'
@@ -19,13 +20,21 @@ import SusGovernModal from './modal/susgovern'
 import SusPolicyModal from './modal/suspolicies'
 import SusRecordModal from './modal/susrecords'
 import SusTechModal from './modal/sustechnology'
+import AcaExternalModal from './modal/acaexternal'
+import AcaInternalModal from './modal/acainternal'
 import AlertModal from './alert'
+import Cookies from 'js-cookie';
+import Authenticator from './fake-authenticator';
 import Parent from './parent'
 import {Container,Row,Col,Form} from 'react-bootstrap';
 import StarRating from '../resources/img/StarRating.png'
 import cookie from '../libs/cookie';
 
+
 export default class Dashboard extends React.PureComponent {
+onLoginRedirectUrl = '/login';
+
+
 
 constructor(props) {
     super(props);
@@ -48,7 +57,8 @@ constructor(props) {
       sustain4: { }, //
       sustain5: { },
       sustain6: { },
-      academic: null,
+      academic1: { },
+      academic2: { },
       sshe: null,
       job_id:'',
       modalcore:'',
@@ -69,12 +79,347 @@ constructor(props) {
       modalsus4:'',
       modalsus5:'',
       modalsus6:'',
+      modalaca1:'',
+      modalaca2:'',
       atttotal1: 0,
       showalert: false,
-      showothers: false
+      showothers: false,
+      loggedIn: false,
+
+      instjoblist: [],
+      insttotalcoreatt: 0,
+      insttotalcorelsn:0,
+      insttotalcoremne:0,
+      insttotalinstr: 0,
+      insttotallearn1:0,
+      insttotallearn2:0,
+      insttotallearn3:0,
+      insttotallearn4:0,
+      insttotaltotal1:0,
+      insttotaltotal2:0,
+      insttotaltotal3:0,
+      insttotaltotal4:0,
+      insttotalsus1: 0,
+      insttotalsus2: 0,
+      insttotalsus3: 0,
+      insttotalsus4: 0,
+      insttotalsus5: 0,
+      insttotalsus6: 0,
+      insttotalaca1: 0,
+      insttotalaca2: 0
+
     };
 
 }
+
+componentDidMount() {
+  const isLoggedIn = Authenticator.isLoggedIn();
+  console.log('Second this called');
+  /**if (isLoggedIn) {
+    this.setState({
+      loggedIn: true,
+    });
+  } else {
+    this.setState({
+      loggedIn: false,
+    });
+  }**/
+
+  //Load all jobs for the logged user....
+ if (isLoggedIn) {
+ let user_logged = JSON.parse(cookie.getItem('users'));
+ console.log("User logged: " + Cookies.get('users') );
+ let name = user_logged.id + "#jobs";
+ let joblist = JSON.parse(cookie.getItem(name));
+
+ this.setState({ instjoblist: joblist });
+
+ //load all scores based on JOB_ID---Core Processes Attendance
+ //Core Processes--------------------------------
+ let totalcoreatt = 0
+  //attendance in Core processesf
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#core#coreattendance";
+   let core_att = JSON.parse(cookie.getItem(name));
+   for (var key in core_att) {
+     totalcoreatt += core_att[key];
+   }
+ }
+this.setState({ insttotalcoreatt: totalcoreatt });
+
+let totalcorelsn = 0
+//lessonnote in Core processes
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#core#corelessonnote";
+   let core_att2 = JSON.parse(cookie.getItem(name));
+
+   for (var key in core_att2) {
+     totalcorelsn += core_att2[key];
+   }
+ } //#core#coremne
+
+ this.setState({ insttotalcorelsn: totalcorelsn });
+
+ let totalcoremne = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#core#coremne";
+
+   let core_att3 = JSON.parse(cookie.getItem(name));
+
+   for (var key in core_att3) {
+     totalcoremne += core_att3[key];
+   }
+ }
+ this.setState({ insttotalcoremne: totalcoremne });
+
+ let totalcore = 0
+ totalcore = totalcoreatt + totalcorelsn + totalcoremne;
+ //end Core Processes--------------------------------
+
+ //Instructor Resourse...................
+ let totalinstr = 0
+//instructor resource
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#instructor";
+
+   let instr = JSON.parse(cookie.getItem(name));
+
+   for (var key in instr) {
+     totalinstr += instr[key];
+   }
+ }
+
+ this.setState({ insttotalinstr: totalinstr });
+
+ //end Instructor Resourse...................
+
+ //Learn environment-----------------
+let totallearn1 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#learn#classroom";
+
+   let learn1 = JSON.parse(cookie.getItem(name));
+
+   for (var key in learn1) {
+     totallearn1 += learn1[key];
+   }
+ }
+
+ this.setState({ insttotallearn1: totallearn1 });
+
+ let totallearn2 = 0
+ //lessonnote in Core processes
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#learn#laboratory";
+
+   let learn2 = JSON.parse(cookie.getItem(name));
+   for (var key in learn2) {
+     totallearn2 += learn2[key];
+   }
+ }
+
+ this.setState({ insttotallearn2: totallearn2 });
+
+ let totallearn3 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#learn#teachingaids";
+
+   let learn3 = JSON.parse(cookie.getItem(name));
+   for (var key in learn3) {
+     totallearn3 += learn3[key];
+   }
+ }
+
+ this.setState({ insttotallearn3: totallearn3 });
+
+ let totallearn4 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#learn#outdoor";
+
+   let learn4 = JSON.parse(cookie.getItem(name));
+   for (var key in learn4) {
+     totallearn4 += learn4[key];
+   }
+ }
+
+ this.setState({ insttotallearn4: totallearn4 });
+
+ let totallearnx = 0
+ totallearnx = totallearn1 + totallearn2 + totallearn3 + totallearn4;
+ //end learn environment----------------------------------
+
+ //total dev env
+ let totaltotal1 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#total#games";
+
+   let total1 = JSON.parse(cookie.getItem(name));
+
+   for (var key in total1) {
+     totaltotal1 += total1[key];
+   }
+ }
+
+ this.setState({ insttotaltotal1: totaltotal1 });
+
+ let totaltotal2 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#total#others";
+
+   let total2 = JSON.parse(cookie.getItem(name));
+   for (var key in total2) {
+     totaltotal2 += total2[key];
+   }
+ }
+
+ this.setState({ insttotaltotal2: totaltotal2 });
+
+ let totaltotal3 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#total#socials";
+
+   let total3 = JSON.parse(cookie.getItem(name));
+   for (var key in total3) {
+     totaltotal3 += total3[key];
+   }
+ }
+
+ this.setState({ insttotaltotal3: totaltotal3 });
+
+ let totaltotal4 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#total#domain";
+
+   let total4 = JSON.parse(cookie.getItem(name));
+   for (var key in total4) {
+     totaltotal4 += total4[key];
+   }
+ }
+
+ this.setState({ insttotaltotal4: totaltotal4 });
+
+ let totalapex = 0
+ totalapex = totaltotal1 + totaltotal2 + totaltotal3 + totaltotal4;
+ //end total dev env
+
+ let totalsus1 = 0
+ //Sustainability
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#academic";
+
+   let total1 = JSON.parse(cookie.getItem(name));
+
+   for (var key in total1) {
+     totalsus1 += total1[key];
+   }
+ }
+
+ this.setState({ insttotalsus1: totalsus1 });
+
+ let totalsus2 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#nonacademic";
+
+   let total2 = JSON.parse(cookie.getItem(name));
+   for (var key in total2) {
+     totalsus2 += total2[key];
+   }
+ }
+
+ this.setState({ insttotalsus2: totalsus2 });
+
+ let totalsus3 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#policy";
+
+   let total3 = JSON.parse(cookie.getItem(name));
+   for (var key in total3) {
+     totalsus3 += total3[key];
+   }
+ }
+
+ let totalsus4 = 0
+ this.setState({ insttotalsus3: totalsus3 });
+
+
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#records";
+
+   let total4 = JSON.parse(cookie.getItem(name));
+   for (var key in total4) {
+     totalsus4 += total4[key];
+   }
+ }
+
+ let totalsus5 = 0
+ this.setState({ insttotalsus4: totalsus4 });
+
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#technology";
+
+   let total5 = JSON.parse(cookie.getItem(name));
+   for (var key in total5) {
+     totalsus5 += total5[key];
+   }
+ }
+
+  this.setState({ insttotalsus5: totalsus5 });
+
+  let totalsus6 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#sustain#governance";
+
+   let total6 = JSON.parse(cookie.getItem(name));
+   for (var key in total6) {
+     totalsus6 += total6[key];
+   }
+ }
+
+ this.setState({ insttotalsus6: totalsus6 });
+
+ let sustainapex = 0
+ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totalsus6;
+
+ //end Sustainability
+
+ //Academic Performance
+
+ let totalaca1 = 0
+ //Sustainability
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#academic#int";
+
+   let total1 = JSON.parse(cookie.getItem(name));
+
+   for (var key in total1) {
+    totalaca1 += total1[key];
+   }
+ }
+
+ this.setState({ insttotalaca1: totalaca1 });
+
+ let totalaca2 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#academic#ext";
+
+   let total2 = JSON.parse(cookie.getItem(name));
+   for (var key in total2) {
+    totalaca2 += total2[key];
+   }
+ }
+
+ this.setState({ insttotalaca2: totalaca2 });
+
+ //End Academic
+}
+
+}
+
+componentWillMount(){
+
+  console.log('First this called');
+}
+
 
 //Onchange Job Combo box
 
@@ -89,7 +434,7 @@ handleSelect(e) {
   this.setState({ showothers: true });
   //core processes
   let first = job_id + "#core#coreattendance";
-  let coreprocess1 = JSON.parse(cookie.getItem(first));
+  let coreprocess1 = JSON.parse( cookie.getItem(first) );
   this.setState({ coreprocess1: coreprocess1 });
 
   let first2 = job_id + "#core#corelessonnote";
@@ -140,14 +485,38 @@ handleSelect(e) {
    this.setState({ student: student4 });
 
    //sustainabilty
-   let fifth = job_id + "#sustain";
+   let fifth = job_id + "#sustain#academic";
    let sustain = JSON.parse(cookie.getItem(fifth));
-   this.setState({ sustain: sustain });
+   this.setState({ sustain1: sustain });
+
+   let fifth2 = job_id + "#sustain#nonacademic";
+   let sustain2 = JSON.parse(cookie.getItem(fifth2));
+   this.setState({ sustain2: sustain2 });
+
+   let fifth3 = job_id + "#sustain#policy";
+   let sustain3 = JSON.parse(cookie.getItem(fifth3));
+   this.setState({ sustain3: sustain3 });
+
+   let fifth4 = job_id + "#sustain#records";
+   let sustain4 = JSON.parse(cookie.getItem(fifth4));
+   this.setState({ sustain4: sustain4 });
+
+   let fifth5 = job_id + "#sustain#technology";
+   let sustain5 = JSON.parse(cookie.getItem(fifth5));
+   this.setState({ sustain5: sustain5 });
+
+   let fifth6 = job_id + "#sustain#governance";
+   let sustain6 = JSON.parse(cookie.getItem(fifth6));
+   this.setState({ sustain6: sustain6 });
 
    //academic
-   let sixth = job_id + "#academic";
+   let sixth = job_id + "#academic#int";
    let academic = JSON.parse(cookie.getItem(sixth));
-   this.setState({ academic: academic });
+   this.setState({ academic1: academic });
+
+   let sixth2 = job_id + "#academic#ext";
+   let academic2 = JSON.parse(cookie.getItem(sixth2));
+   this.setState({ academic2: academic2 });
 
    //sshe
    let seventh = job_id + "#sshe";
@@ -194,6 +563,9 @@ handleClose = (e) => {
       modalsus4:'',
       modalsus5:'',
       modalsus6:'',
+      modalaca1:'',
+      modalaca2:'',
+
 });
 
 }
@@ -286,7 +658,7 @@ console.log('The Total: ' + total);
 let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9 };
 let coreval = JSON.stringify(corearray);
 
-cookie.setItem(name,coreval);//for cookie
+cookie.setItem(name,coreval)//for cookie
 this.setState({ coreprocess1: corearray });//for state
 //this.setState({ showalert: true });//alert show
 alert("Core Attendance Data has been saved... :-) ")
@@ -344,8 +716,8 @@ saveCoreLessonnote = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9, att_10: att10 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)
+  //cookie.setItem(name,coreval)//for cookie
   this.setState({ coreprocess2: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Core Lessonnote Data has been saved... :-) ")
@@ -404,7 +776,7 @@ saveCoreLessonnote = (e) => {
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9, att_10: att10 };
     let coreval = JSON.stringify(corearray);
 
-    cookie.setItem(name,coreval);//for cookie
+    cookie.setItem(name,coreval)//for cookie
     this.setState({ coreprocess3: corearray });//for state
     //this.setState({ showalert: true });//alert show
     alert("Core MNE Data has been saved... :-) ")
@@ -469,7 +841,7 @@ handleInputChangeInstr = (event) => {
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ instructor: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Instructor Data has been saved... :-) ")
@@ -614,7 +986,7 @@ else { att10 = 0; }
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ learn1: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Learn classroom Data has been saved... :-) ")
@@ -657,7 +1029,7 @@ else { att10 = 0; }
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
     let coreval = JSON.stringify(corearray);
 
-    cookie.setItem(name,coreval);//for cookie
+    cookie.setItem(name,coreval)//for cookie
     this.setState({ learn2: corearray });//for state
 
     alert("Learn outdoor Data has been saved... :-) ")
@@ -696,7 +1068,7 @@ else { att10 = 0; }
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
       let coreval = JSON.stringify(corearray);
 
-      cookie.setItem(name,coreval);//for cookie
+      cookie.setItem(name,coreval)//for cookie
       this.setState({ learn3: corearray });//for state
 
       alert("Learn Teaching aids Data has been saved... :-) ")
@@ -735,7 +1107,7 @@ else { att10 = 0; }
         let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
         let coreval = JSON.stringify(corearray);
 
-        cookie.setItem(name,coreval);//for cookie
+        cookie.setItem(name,coreval)//for cookie
         this.setState({ learn4: corearray });//for state
 
         alert("Learn Teaching aids Data has been saved... :-) ")
@@ -898,7 +1270,7 @@ saveTotal1 = (e) => {
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ student1: corearray });//for state
 
   alert("Total Human Dev. games & sports Data has been saved... :-) ")
@@ -964,7 +1336,7 @@ saveTotal1 = (e) => {
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11  };
     let coreval = JSON.stringify(corearray);
 
-    cookie.setItem(name,coreval);//for cookie
+    cookie.setItem(name,coreval)//for cookie
     this.setState({ student2: corearray });//for state
 
     alert("Total Human Dev. Others Data has been saved... :-) ")
@@ -1026,7 +1398,7 @@ saveTotal1 = (e) => {
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
       let coreval = JSON.stringify(corearray);
 
-      cookie.setItem(name,coreval);//for cookie
+      cookie.setItem(name,coreval)//for cookie
       this.setState({ student3: corearray });//for state
 
       alert("Total Human Dev. SOcials Data has been saved... :-) ")
@@ -1074,7 +1446,7 @@ saveTotal1 = (e) => {
         let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7 };
         let coreval = JSON.stringify(corearray);
 
-        cookie.setItem(name,coreval);//for cookie
+        cookie.setItem(name,coreval)//for cookie
         this.setState({ student4: corearray });//for state
 
         alert("Total Human Dev. Domain Data has been saved... :-) ")
@@ -1253,7 +1625,7 @@ saveSustain1 = (e) => {
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ sustain1: corearray });//for state
 
   alert("Sustainabilty Academic Data has been saved... :-) ")
@@ -1316,7 +1688,7 @@ saveSustain2 = (e) => {
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ sustain2: corearray });//for state
 
   alert("Sustainabilty Non-Academic Data has been saved... :-) ")
@@ -1441,7 +1813,7 @@ saveSustain2 = (e) => {
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15, att_16: att16, att_17: att17, att_18: att18, att_19: att19, att_20: att20, att_21: att21, att_22: att22, att_23: att23 };
     let coreval = JSON.stringify(corearray);
 
-    cookie.setItem(name,coreval);//for cookie
+    cookie.setItem(name,coreval)//for cookie
     this.setState({ sustain3: corearray });//for state
 
     alert("Sustain policy Data has been saved... :-) ")
@@ -1481,7 +1853,7 @@ saveSustain4 = (e) => {
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
   let coreval = JSON.stringify(corearray);
 
-  cookie.setItem(name,coreval);//for cookie
+  cookie.setItem(name,coreval)//for cookie
   this.setState({ sustain4: corearray });//for state
 
   alert("Sustainabilty Records Data has been saved... :-) ")
@@ -1524,7 +1896,7 @@ saveSustain4 = (e) => {
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
     let coreval = JSON.stringify(corearray);
 
-    cookie.setItem(name,coreval);//for cookie
+    cookie.setItem(name,coreval)//for cookie
     this.setState({ sustain5: corearray });//for state
 
     alert("Sustainabilty Technology Data has been saved... :-) ")
@@ -1564,7 +1936,7 @@ saveSustain4 = (e) => {
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
       let coreval = JSON.stringify(corearray);
 
-      cookie.setItem(name,coreval);//for cookie
+      cookie.setItem(name,coreval)//for cookie
       this.setState({ sustain6: corearray });//for state
 
       alert("Sustainabilty Governance Data has been saved... :-) ")
@@ -1573,222 +1945,151 @@ saveSustain4 = (e) => {
 
 //Sustainability.........
 
+//Academic
+handleAca1(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal Academic 1 jus ran");
+  this.setState({ modalaca1: 'is-active' });
+}
+
+handleAca2(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal Academic 2 jus ran");
+  this.setState({ modalaca2: 'is-active' });
+}
+
+handleInputChangeAca1 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+     academic1: {
+        ...this.state.academic1,
+        [name]: value
+     }
+ });
+ console.log(this.state.academic1)
+ }
+
+ handleInputChangeAca2 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+     academic2: {
+        ...this.state.academic2,
+        [name]: value
+     }
+ });
+ console.log(this.state.academic2)
+ }
+
+
+saveAcademic = (e) => {
+  let name = this.state.job_id + "#academic#int";
+
+  let att1, att2 , att3, att4, att5, att6 = 0;
+  let total = 0;
+
+  if(this.state.academic1 && this.state.academic1.att_1 !== undefined ) {
+       att1 = parseInt(this.state.academic1.att_1)
+  }
+     else { att1 = 0; }
+  if(this.state.academic1 && this.state.academic1.att_2 !== undefined) {
+       att2 = parseInt(this.state.academic1.att_2)
+  }
+      else { att2 = 0; }
+  if(this.state.academic1 && this.state.academic1.att_3 !== undefined) {
+       att3 = parseInt(this.state.academic1.att_3)
+      }
+      else { att3 = 0; }
+  if(this.state.academic1 && this.state.academic1.att_4 !== undefined) {
+        att4 = parseInt(this.state.academic1.att_4)
+      }
+      else { att4 = 0; }
+  if(this.state.academic1 && this.state.academic1.att_5 !== undefined) {
+        att5 = parseInt(this.state.academic1.att_5)
+        }
+      else { att5 = 0; }
+
+  if(this.state.academic1 && this.state.academic1.att_6 !== undefined) {
+        att6 = parseInt(this.state.academic1.att_6)
+        }
+      else { att6 = 0; }
+
+
+  total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6);
+  console.log('The Total: ' + total);
+
+  let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 ,  att_6: att6 };
+  let coreval = JSON.stringify(corearray);
+
+  cookie.setItem(name,coreval)//for cookie
+  this.setState({ academic1: corearray });//for state
+
+  alert("Academic Internal Data has been saved... :-) ")
+  }
+
+  saveAcademic2 = (e) => {
+    let name = this.state.job_id + "#academic#ext";
+
+    let att1, att2 , att3, att4 = 0;
+    let total = 0;
+
+    if(this.state.academic2 && this.state.academic2.att_1 !== undefined ) {
+         att1 = parseInt(this.state.academic2.att_1)
+    }
+       else { att1 = 0; }
+    if(this.state.academic2 && this.state.academic2.att_2 !== undefined) {
+         att2 = parseInt(this.state.academic2.att_2)
+    }
+        else { att2 = 0; }
+    if(this.state.academic2 && this.state.academic2.att_3 !== undefined) {
+         att3 = parseInt(this.state.academic2.att_3)
+        }
+        else { att3 = 0; }
+    if(this.state.academic2 && this.state.academic2.att_4 !== undefined) {
+          att4 = parseInt(this.state.academic2.att_4)
+        }
+        else { att4 = 0; }
+
+    total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) ;
+    console.log('The Total: ' + total);
+
+    let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4 };
+    let coreval = JSON.stringify(corearray);
+
+    cookie.setItem(name,coreval)//for cookie
+    this.setState({ academic1: corearray });//for state
+
+    alert("Academic External Data has been saved... :-) ")
+    }
+//End Academic
+
 
 render() {
   const {
    modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 ,
    modaltotal1, modaltotal2, modaltotal3, modaltotal4,
-   modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6
+   modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6, modalaca1, modalaca2,
+   loggedIn,
+   instjoblist, insttotalcoreatt, insttotalcorelsn, insttotalcoremne ,
+   insttotalinstr,insttotallearn1,insttotallearn2,insttotallearn3,insttotallearn4,
+   insttotaltotal1,insttotaltotal2,insttotaltotal3,insttotaltotal4,
+   insttotalsus1,insttotalsus2,insttotalsus3,insttotalsus4,insttotalsus5,insttotalsus6,
+   insttotalaca1, insttotalaca2
   } = this.state;
 
-//Load all jobs for the logged user....
-let user_logged = JSON.parse(cookie.getItem('users'));
-let name = user_logged.id + "#jobs";
-let joblist = JSON.parse(cookie.getItem(name));
-
-//load all scores based on JOB_ID---Core Processes Attendance
-//Core Processes--------------------------------
-let totalcoreatt = 0 //attendance in Core processesf
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#core#coreattendance";
-  let core_att = JSON.parse(cookie.getItem(name));
 
 
-  for (var key in core_att) {
-    totalcoreatt += core_att[key];
-  }
-}
 
-let totalcorelsn = 0 //lessonnote in Core processes
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#core#corelessonnote";
-  let core_att2 = JSON.parse(cookie.getItem(name));
-
-
-  for (var key in core_att2) {
-    totalcorelsn += core_att2[key];
-  }
-} //#core#coremne
-
-let totalcoremne = 0 //mne in Core processes
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#core#coremne";
-  let core_att3 = JSON.parse(cookie.getItem(name));
-
-
-  for (var key in core_att3) {
-    totalcoremne += core_att3[key];
-  }
-}
-
-let totalcore = 0
-totalcore = totalcoreatt + totalcorelsn + totalcoremne;
-//end Core Processes--------------------------------
-
-//Instructor Resourse...................
-let totalinstr = 0 //instructor resource
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#instructor";
-  let instr = JSON.parse(cookie.getItem(name));
-
-  for (var key in instr) {
-    totalinstr += instr[key];
-  }
-}
-
-//end Instructor Resourse...................
-
-//Learn environment-----------------
-let totallearn1 = 0 //
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#learn#classroom";
-  let learn1 = JSON.parse(cookie.getItem(name));
-
-
-  for (var key in learn1) {
-    totallearn1 += learn1[key];
-  }
-}
-
-let totallearn2 = 0 //lessonnote in Core processes
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#learn#laboratory";
-  let learn2 = JSON.parse(cookie.getItem(name));
-  for (var key in learn2) {
-    totallearn2 += learn2[key];
-  }
-}
-
-let totallearn3 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#learn#teachingaids";
-  let learn3 = JSON.parse(cookie.getItem(name));
-  for (var key in learn3) {
-    totallearn3 += learn3[key];
-  }
-}
-
-let totallearn4 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#learn#outdoor";
-  let learn4 = JSON.parse(cookie.getItem(name));
-  for (var key in learn4) {
-    totallearn4 += learn4[key];
-  }
-}
-
-let totallearnx = 0
-totallearnx = totallearn1 + totallearn2 + totallearn3 + totallearn4;
-//end learn environment----------------------------------
-
-//total dev env
-let totaltotal1 = 0 //
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#total#games";
-  let total1 = JSON.parse(cookie.getItem(name));
-
-  for (var key in total1) {
-    totaltotal1 += total1[key];
-  }
-}
-
-let totaltotal2 = 0 //
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#total#others";
-  let total2 = JSON.parse(cookie.getItem(name));
-  for (var key in total2) {
-    totaltotal2 += total2[key];
-  }
-}
-
-let totaltotal3 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#total#socials";
-  let total3 = JSON.parse(cookie.getItem(name));
-  for (var key in total3) {
-    totaltotal3 += total3[key];
-  }
-}
-
-let totaltotal4 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#total#domain";
-  let total4 = JSON.parse(cookie.getItem(name));
-  for (var key in total4) {
-    totaltotal4 += total4[key];
-  }
-}
-
-let totalapex = 0
-totalapex = totaltotal1 + totaltotal2 + totaltotal3 + totaltotal4;
-//end total dev env
-
-//Sustainability
-let totalsus1 = 0 //
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#academic";
-  let total1 = JSON.parse(cookie.getItem(name));
-
-  for (var key in total1) {
-    totalsus1 += total1[key];
-  }
-}
-
-let totalsus2 = 0 //
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#nonacademic";
-  let total2 = JSON.parse(cookie.getItem(name));
-  for (var key in total2) {
-    totalsus2 += total2[key];
-  }
-}
-
-let totalsus3 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#policy";
-  let total3 = JSON.parse(cookie.getItem(name));
-  for (var key in total3) {
-    totalsus3 += total3[key];
-  }
-}
-
-let totalsus4 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#records";
-  let total4 = JSON.parse(cookie.getItem(name));
-  for (var key in total4) {
-    totalsus4 += total4[key];
-  }
-}
-
-let totalsus5 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#technology";
-  let total5 = JSON.parse(cookie.getItem(name));
-  for (var key in total5) {
-    totalsus5 += total5[key];
-  }
-}
-
-let totalsus6 = 0
-if (this.state.job_id !== ''){
-  let name = this.state.job_id + "#sustain#governance";
-  let total6 = JSON.parse(cookie.getItem(name));
-  for (var key in total6) {
-    totalsus6 += total6[key];
-  }
-}
-
-let sustainapex = 0
-sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totalsus6;
-
-//end Sustainability
 
   return (
   <Protected>
     <UserLayout>
 
-     { this.state.showalert ? <AlertModal handleClose = {this.handleClose} />  : null }
+
+
     <div className="level">
     <div className="level-item has-text-centered">
       <div className="field">
@@ -1797,10 +2098,11 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
             <div className="select is-large">
               <select onChange={e => this.handleSelect(e)}>
               <option value= "#">Choose...</option>
-              { joblist.map((link) =>
-              <option value={link.J_ID}> {link.J_NAME} </option>
+              { instjoblist.map( (link,i) =>
+              <option key={i} value={link.J_ID}> {link.J_NAME} </option>
               )
               }
+
               </select>
             </div>
           </div>
@@ -1815,29 +2117,29 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
 			<Col md={4}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Core Processes</h4>
-          <p className="score">{totalcore}</p>
-          <button className="button is-small is-warning"  onClick={e => this.handleCore(e)} > Edit Attendance >> {totalcoreatt} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleCore2(e)} > Edit Lessonnote  >> {totalcorelsn} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleCore3(e)} > Edit M&E  >> {totalcoremne} score </button>
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleCore(e)} > Edit Attendance >> {insttotalcoreatt} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleCore2(e)} > Edit Lessonnote  >> {insttotalcorelsn} score </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleCore3(e)} > Edit M&E  >> {insttotalcoremne} score </button>
         </div>
       </Col>
 
       <Col sm={4}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Instructor Resource</h4>
-          <p className="score">{totalinstr}</p>
-          &nbsp;&nbsp;&nbsp; <button className="button is-small is-warning"  onClick={e => this.handleInst(e)} > Edit Instructor Resource >> {totalinstr} score </button>
+          <p className="score"></p>
+          &nbsp;&nbsp;&nbsp; <button className="button is-small is-warning"  onClick={e => this.handleInst(e)} > Edit Instructor Resource >> {insttotalinstr} score </button>
         </div>
       </Col>
 
 			<Col sm={2}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Learning Environment</h4>
-          <p className="score">{totallearnx}</p>
-          <button className="button is-small is-warning"  onClick={e => this.handleLearn1(e)} > Edit Classroom >> {totallearn1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleLearn2(e)} > Edit Laboratory  >> {totallearn2} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleLearn3(e)} > Edit Teaching Aids  >> {totallearn3} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleLearn4(e)} > Edit Outdoor  >> {totallearn4} score </button>  &nbsp;&nbsp;&nbsp;
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleLearn1(e)} > Edit Classroom >> {insttotallearn1} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleLearn2(e)} > Edit Laboratory  >> {insttotallearn2} score </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleLearn3(e)} > Edit Teaching Aids  >> {insttotallearn3} score </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleLearn4(e)} > Edit Outdoor  >> {insttotallearn4} score </button>  &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -1845,11 +2147,11 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
 			<Col sm={2}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Student Development</h4>
-          <p className="score">{totalapex}</p>
-          <button className="button is-small is-warning"  onClick={e => this.handleTotal1(e)} > Edit Games & Sports >> {totaltotal1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleTotal2(e)} > Edit Other Competitions >> {totaltotal2} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleTotal3(e)} > Edit Socials >> {totaltotal3} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleTotal4(e)} > Edit Domain relationships >> {totaltotal4} score </button> &nbsp;&nbsp;&nbsp;
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleTotal1(e)} > Edit Games & Sports >> {insttotaltotal1} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleTotal2(e)} > Edit Other Competitions >> {insttotaltotal2} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleTotal3(e)} > Edit Socials >> {insttotaltotal3} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleTotal4(e)} > Edit Domain relationships >> {insttotaltotal4} score </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -1858,12 +2160,12 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Sustainability</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic) >> {totalsus1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) >> {totalsus2} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy >> {totalsus3}  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records >> {totalsus4} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology >> {totalsus5} score </button> &nbsp;&nbsp;&nbsp; <br/>
-          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance >> {totalsus6}  score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic) >> {insttotalsus1} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) >> {insttotalsus2} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy >> {insttotalsus3}  score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records >> {insttotalsus4} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology >> {insttotalsus5} score </button> &nbsp;&nbsp;&nbsp; <br/>
+          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance >> {insttotalsus6}  score </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -1871,7 +2173,10 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
 			<Col sm={2}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Performance</h4>
-          <p className="score">38</p>
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleAca1(e)} > Edit Internal Academic Performance >> {insttotalaca1} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleAca2(e)} > Edit External Academic Performance >> {insttotalaca2} score </button> &nbsp;&nbsp;&nbsp;
+
         </div>
       </Col>
 
@@ -1908,6 +2213,10 @@ sustainapex = totalsus1 + totalsus2 + totalsus3 + totalsus4 + totalsus5 + totals
      <SusRecordModal active = {modalsus4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus4.bind(this)} saveform={this.saveSustain4.bind(this)} sustain={this.state.sustain4} />
      <SusTechModal active = {modalsus5} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus5.bind(this)} saveform={this.saveSustain5.bind(this)} sustain={this.state.sustain5} />
      <SusGovernModal active = {modalsus6} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus6.bind(this)} saveform={this.saveSustain6.bind(this)} sustain={this.state.sustain6} />
+
+
+     <AcaInternalModal active = {modalaca1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca1.bind(this)} saveform={this.saveAcademic.bind(this)} academic={this.state.academic1} />
+     <AcaExternalModal active = {modalaca2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca2.bind(this)} saveform={this.saveAcademic2.bind(this)} academic={this.state.academic2} />
 
     </UserLayout>
   </Protected>

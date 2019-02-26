@@ -7,7 +7,7 @@ export default class GuestLayout extends React.PureComponent {
     // eslint-disable-next-line
     const { children } = this.props;
     let user_logged = JSON.parse(cookie.getItem('users'));
-    console.log(user_logged);
+   // console.log(user_logged);
 
 
     return (

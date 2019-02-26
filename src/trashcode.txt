@@ -18,3 +18,45 @@
 			</Col>
     </div>
     </div>
+
+
+      instjoblist: [],
+      insttotalcoreatt: 0,
+      insttotalcorelsn:0,
+      insttotalcoremne:0,
+      insttotalinstr: 0,
+      insttotallearn1:0,
+      insttotallearn2:0,
+      insttotallearn3:0,
+      insttotallearn4:0,
+      insttotaltotal1:0,
+      insttotaltotal2:0,
+      insttotaltotal3:0,
+      insttotaltotal4:0,
+      insttotalsus1: 0,
+      insttotalsus2: 0,
+      insttotalsus3: 0,
+      insttotalsus4: 0,
+      insttotalsus5: 0,
+      insttotalsus6: 0
+
+
+       let joblist = [];
+ let totalcoreatt = 0;
+ let totalcorelsn = 0;
+ let totalcoremne = 0;
+ let totalinstr = 0;
+ let totallearn1 = 0;
+ let totallearn2 = 0;
+ let totallearn3 = 0;
+ let totallearn4 = 0;
+ let totaltotal1 = 0;
+ let totaltotal2 = 0;
+ let totaltotal3 = 0;
+ let totaltotal4 = 0;
+ let totalsus1 = 0;
+ let totalsus2 = 0;
+ let totalsus3 = 0;
+ let totalsus4 = 0;
+ let totalsus5 = 0;
+ let totalsus6 = 0;

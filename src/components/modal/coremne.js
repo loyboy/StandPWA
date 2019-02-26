@@ -14,10 +14,10 @@ export default class CoreMneModal extends React.PureComponent {
         </header>
         <section className="modal-card-body">
 
-        <div class="field">
-          <label class="label">Operation? </label>
-          <p class=" help">Does the school operate lesson note?</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Operation? </label>
+          <p className=" help">Does the school operate lesson note?</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_1 : ''}>
               <option value=''>Choose---</option>
@@ -30,10 +30,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Consistency ? </label>
-          <p class="help">Take from the last complete term, was there a consistent, predictable M&E regime?</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Consistency ? </label>
+          <p className="help">Take from the last complete term, was there a consistent, predictable M&E regime?</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_2 : ''}>
               <option value=''>Choose---</option>
@@ -45,10 +45,10 @@ export default class CoreMneModal extends React.PureComponent {
         </div>
 
 
-        <div class="field">
-          <label class="label">Scope ? </label>
-          <p class="help">For students – classwork, assignment, weekly, mid-term & terminal; attendance; instructors – attendance, lesson notes operation and lesson notes performance; head – supervision of processes, timing and efficiency thereof, application of processes policy</p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Scope ? </label>
+          <p className="help">For students – classwork, assignment, weekly, mid-term & terminal; attendance; instructors – attendance, lesson notes operation and lesson notes performance; head – supervision of processes, timing and efficiency thereof, application of processes policy</p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_3 : ''}>
               <option value='0'>Choose---</option>
@@ -61,10 +61,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Security ? </label>
-          <p class="help"> M&E operation vulnerability and susceptibility to rigging? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Security ? </label>
+          <p className="help"> M&E operation vulnerability and susceptibility to rigging? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_4 : ''}>
               <option value='0'>Choose---</option>
@@ -76,10 +76,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Transparency ? </label>
-          <p class="help">Is the M&E system transparent and predictable to students, instructors and parents? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Transparency ? </label>
+          <p className="help">Is the M&E system transparent and predictable to students, instructors and parents? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_5 : ''}>
               <option value=''>Choose---</option>
@@ -90,10 +90,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Standard ? </label>
-          <p class="help">Are units of measurement conventional and popular standards of pass, fail, excellent (>=50 as pass)? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Standard ? </label>
+          <p className="help">Are units of measurement conventional and popular standards of pass, fail, excellent (>=50 as pass)? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_6 : ''}>
               <option value=''>Choose---</option>
@@ -104,10 +104,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Record Keeping? </label>
-          <p class="help">Is record of M&E diligently kept, at least during the former term? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Record Keeping? </label>
+          <p className="help">Is record of M&E diligently kept, at least during the former term? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_7" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_7 : ''}>
             <option value=''>Choose---</option>
@@ -118,10 +118,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label"> Preservation ? </label>
-          <p class="help"> Archives maintained in a reliable, recoverable and sustainable manner? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label"> Preservation ? </label>
+          <p className="help"> Archives maintained in a reliable, recoverable and sustainable manner? </p>
+          <div className="control">
           <div className="select is-large">
             <select name="att_8" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_8 : ''}>
               <option value=''>Choose---</option>
@@ -133,10 +133,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Supervision? </label>
-          <p class="help">Evidence of supervision of M&E operation? </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Supervision? </label>
+          <p className="help">Evidence of supervision of M&E operation? </p>
+          <div className="control">
           <div className="select is-large">
 
             <select name="att_9" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_9 : ''}>
@@ -148,10 +148,10 @@ export default class CoreMneModal extends React.PureComponent {
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Application? </label>
-          <p class="help">Evidence of M&E record being used to enforce policy, QA and QC </p>
-          <div class="control">
+        <div className="field">
+          <label className="label">Application? </label>
+          <p className="help">Evidence of M&E record being used to enforce policy, QA and QC </p>
+          <div className="control">
           <div className="select is-large">
 
           <select name="att_10" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_10 : ''}>
