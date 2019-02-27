@@ -2456,7 +2456,7 @@ render() {
   const {
    modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 ,
    modaltotal1, modaltotal2, modaltotal3, modaltotal4,
-   modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6, modalaca1, modalaca2,
+   modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6, modalaca1, modalaca2, modalsshe1,  modalsshe2,  modalsshe3 ,  modalsshe4 ,
    loggedIn,
    instjoblist, insttotalcoreatt, insttotalcorelsn, insttotalcoremne ,
    insttotalinstr,insttotallearn1,insttotallearn2,insttotallearn3,insttotallearn4,
