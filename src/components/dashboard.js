@@ -22,6 +22,10 @@ import SusRecordModal from './modal/susrecords'
 import SusTechModal from './modal/sustechnology'
 import AcaExternalModal from './modal/acaexternal'
 import AcaInternalModal from './modal/acainternal'
+import SsheSafetylModal from './modal/sshesafety'
+import SsheEnvironlModal from './modal/ssheenviron'
+import SsheHealthlModal from './modal/sshehealth'
+import SsheSecuritylModal from './modal/sshesecurity'
 import AlertModal from './alert'
 import Cookies from 'js-cookie';
 import Authenticator from './fake-authenticator';
@@ -59,7 +63,11 @@ constructor(props) {
       sustain6: { },
       academic1: { },
       academic2: { },
-      sshe: null,
+      sshe1: { },
+      sshe2: { },
+      sshe3: { },
+      sshe4: { },
+
       job_id:'',
       modalcore:'',
       modalcoree:'',
@@ -81,6 +89,10 @@ constructor(props) {
       modalsus6:'',
       modalaca1:'',
       modalaca2:'',
+      modalsshe1:'',
+      modalsshe2:'',
+      modalsshe3:'',
+      modalsshe4:'',
       atttotal1: 0,
       showalert: false,
       showothers: false,
@@ -519,9 +531,22 @@ handleSelect(e) {
    this.setState({ academic2: academic2 });
 
    //sshe
-   let seventh = job_id + "#sshe";
+   let seventh = job_id + "#sshe#safety";
    let sshe = JSON.parse(cookie.getItem(seventh));
-   this.setState({ sshe: sshe });
+   this.setState({ sshe1: sshe });
+
+   let seventh2 = job_id + "#sshe#environment";
+   let sshe2 = JSON.parse(cookie.getItem(seventh2));
+   this.setState({ sshe2: sshe2 });
+
+
+   let seventh3 = job_id + "#sshe#health";
+   let sshe3 = JSON.parse(cookie.getItem(seventh3));
+   this.setState({ sshe3: sshe3 });
+
+   let seventh4 = job_id + "#sshe#environment";
+   let sshe4 = JSON.parse(cookie.getItem(seventh4));
+   this.setState({ sshe4: sshe4 });
   }
   else if ( job_id === "#"){
     this.setState({ showothers: false });
@@ -565,7 +590,10 @@ handleClose = (e) => {
       modalsus6:'',
       modalaca1:'',
       modalaca2:'',
-
+      modalsshe1:'',
+      modalsshe2:'',
+      modalsshe3:'',
+      modalsshe4:''
 });
 
 }
@@ -2066,6 +2094,363 @@ saveAcademic = (e) => {
     }
 //End Academic
 
+//SSHE
+handleSshe1(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal SShe 1 jus ran");
+  this.setState({ modalsshe1: 'is-active' });
+}
+
+handleSshe2(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal SShe 2 jus ran");
+  this.setState({ modalsshe2: 'is-active' });
+}
+
+handleSshe3(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal SShe 3 jus ran");
+  this.setState({ modalsshe3: 'is-active' });
+}
+
+handleSshe4(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal SShe 4 jus ran");
+  this.setState({ modalsshe4: 'is-active' });
+}
+
+handleInputChangeSshe1 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+     sshe1: {
+        ...this.state.sshe1,
+        [name]: value
+     }
+ });
+ console.log(this.state.sshe1)
+ }
+
+ handleInputChangeSshe2 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+    sshe2: {
+        ...this.state.sshe2,
+        [name]: value
+     }
+ });
+ console.log(this.state.sshe2)
+ }
+
+ handleInputChangeSshe3 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+    sshe3: {
+        ...this.state.sshe3,
+        [name]: value
+     }
+ });
+ console.log(this.state.sshe3)
+ }
+
+ handleInputChangeSshe4 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+    sshe4: {
+        ...this.state.sshe4,
+        [name]: value
+     }
+ });
+ console.log(this.state.sshe4)
+ }
+
+ saveSshe = (e) => {
+  let name = this.state.job_id + "#sshe#safety";
+
+  let att1, att2 , att3, att4, att5, att6, att7, att8, att9, att10 = 0;
+  let total = 0;
+
+  if(this.state.sshe1 && this.state.sshe1.att_1 !== undefined ) {
+       att1 = parseInt(this.state.sshe1.att_1)
+  }
+     else { att1 = 0; }
+  if(this.state.sshe1 && this.state.sshe1.att_2 !== undefined) {
+       att2 = parseInt(this.state.sshe1.att_2)
+  }
+      else { att2 = 0; }
+  if(this.state.sshe1 && this.state.sshe1.att_3 !== undefined) {
+       att3 = parseInt(this.state.sshe1.att_3)
+      }
+      else { att3 = 0; }
+  if(this.state.sshe1 && this.state.sshe1.att_4 !== undefined) {
+        att4 = parseInt(this.state.sshe1.att_4)
+      }
+      else { att4 = 0; }
+  if(this.state.sshe1 && this.state.sshe1.att_5 !== undefined) {
+        att5 = parseInt(this.state.sshe1.att_5)
+        }
+      else { att5 = 0; }
+
+  if(this.state.sshe1 && this.state.sshe1.att_6 !== undefined) {
+        att6 = parseInt(this.state.sshe1.att_6)
+        }
+      else { att6 = 0; }
+
+  if(this.state.sshe1 && this.state.sshe1.att_7 !== undefined) {
+        att7 = parseInt(this.state.sshe1.att_7)
+        }
+  else { att7 = 0; }
+
+  if(this.state.sshe1 && this.state.sshe1.att_8 !== undefined) {
+    att8 = parseInt(this.state.sshe1.att_8)
+    }
+else { att8 = 0; }
+
+if(this.state.sshe1 && this.state.sshe1.att_9 !== undefined) {
+  att9 = parseInt(this.state.sshe1.att_9)
+  }
+else { att9 = 0; }
+
+if(this.state.sshe1 && this.state.sshe1.att_10 !== undefined) {
+  att10 = parseInt(this.state.sshe1.att_10)
+  }
+else { att10 = 0; }
+
+
+  total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6);
+  console.log('The Total: ' + total);
+
+  let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 ,  att_6: att6 };
+  let coreval = JSON.stringify(corearray);
+
+  cookie.setItem(name,coreval)//for cookie
+  this.setState({ sshe1: corearray });//for state
+
+  alert("Safety SSHE Data has been saved... :-) ")
+  }
+
+  saveSshe2 = (e) => {
+    let name = this.state.job_id + "#sshe#environment";
+
+    let att1, att2 , att3 = 0;
+    let total = 0;
+
+    if(this.state.sshe2 && this.state.sshe2.att_1 !== undefined ) {
+         att1 = parseInt(this.state.sshe2.att_1)
+    }
+       else { att1 = 0; }
+    if(this.state.sshe2 && this.state.sshe2.att_2 !== undefined) {
+         att2 = parseInt(this.state.sshe2.att_2)
+    }
+        else { att2 = 0; }
+    if(this.state.sshe2 && this.state.sshe2.att_3 !== undefined) {
+         att3 = parseInt(this.state.sshe2.att_3)
+        }
+    else { att3 = 0; }
+
+
+
+    total = parseInt(att1) + parseInt(att2) + parseInt(att3);
+    console.log('The Total: ' + total);
+
+    let corearray = { att_1: att1, att_2: att2, att_3: att3 };
+    let coreval = JSON.stringify(corearray);
+
+    cookie.setItem(name,coreval)//for cookie
+    this.setState({ sshe2: corearray });//for state
+
+    alert("Safety Environment Data has been saved... :-) ")
+    }
+
+    saveSshe3 = (e) => {
+      let name = this.state.job_id + "#sshe#health";
+
+      let att1, att2 , att3, att4, att5, att6, att7, att8, att9, att10 , att11, att12, att13, att14, att15 = 0;
+  let total = 0;
+
+  if(this.state.sshe3 && this.state.sshe3.att_1 !== undefined ) {
+       att1 = parseInt(this.state.sshe3.att_1)
+  }
+     else { att1 = 0; }
+
+  if(this.state.sshe3 && this.state.sshe3.att_2 !== undefined) {
+       att2 = parseInt(this.state.sshe3.att_2)
+  }
+      else { att2 = 0; }
+  if(this.state.sshe3 && this.state.sshe3.att_3 !== undefined) {
+       att3 = parseInt(this.state.sshe3.att_3)
+      }
+      else { att3 = 0; }
+  if(this.state.sshe3 && this.state.sshe3.att_4 !== undefined) {
+        att4 = parseInt(this.state.sshe3.att_4)
+      }
+      else { att4 = 0; }
+  if(this.state.sshe3 && this.state.sshe3.att_5 !== undefined) {
+        att5 = parseInt(this.state.sshe3.att_5)
+        }
+      else { att5 = 0; }
+
+  if(this.state.sshe3 && this.state.sshe3.att_6 !== undefined) {
+        att6 = parseInt(this.state.sshe3.att_6)
+        }
+      else { att6 = 0; }
+
+  if(this.state.sshe3 && this.state.sshe3.att_7 !== undefined) {
+        att7 = parseInt(this.state.sshe3.att_7)
+        }
+  else { att7 = 0; }
+
+  if(this.state.sshe3 && this.state.sshe3.att_8 !== undefined) {
+    att8 = parseInt(this.state.sshe3.att_8)
+    }
+else { att8 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_9 !== undefined) {
+  att9 = parseInt(this.state.sshe3.att_9)
+  }
+else { att9 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_10 !== undefined) {
+  att10 = parseInt(this.state.sshe3.att_10)
+  }
+else { att10 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_11 !== undefined) {
+  att11 = parseInt(this.state.sshe3.att_11)
+  }
+else { att11 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_12 !== undefined) {
+  att12 = parseInt(this.state.sshe3.att_12)
+  }
+else { att12 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_13 !== undefined) {
+  att13 = parseInt(this.state.sshe3.att_13)
+  }
+else { att13 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_14 !== undefined) {
+  att14 = parseInt(this.state.sshe3.att_14)
+  }
+else { att14 = 0; }
+
+if(this.state.sshe3 && this.state.sshe3.att_15 !== undefined) {
+  att15 = parseInt(this.state.sshe3.att_15)
+  }
+else { att15 = 0; }
+
+      total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6) + parseInt(att7) + parseInt(att8) + parseInt(att9) + parseInt(att10) + parseInt(att11) + parseInt(att12) + parseInt(att13) + parseInt(att14) + parseInt(att15);
+      console.log('The Total: ' + total);
+
+      let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10,  att_11: att11,  att_12: att12,  att_13: att13,  att_14: att14,  att_15: att15 };
+      let coreval = JSON.stringify(corearray);
+
+      cookie.setItem(name,coreval)//for cookie
+      this.setState({ sshe3: corearray });//for state
+
+      alert("Safety Health Data has been saved... :-) ")
+      }
+
+      saveSshe4 = (e) => {
+        let name = this.state.job_id + "#sshe#security";
+
+        let att1, att2 , att3, att4, att5, att6, att7, att8, att9, att10 , att11, att12, att13, att14, att15 = 0;
+    let total = 0;
+
+    if(this.state.sshe4 && this.state.sshe4.att_1 !== undefined ) {
+         att1 = parseInt(this.state.sshe4.att_1)
+    }
+       else { att1 = 0; }
+
+    if(this.state.sshe4 && this.state.sshe4.att_2 !== undefined) {
+         att2 = parseInt(this.state.sshe4.att_2)
+    }
+        else { att2 = 0; }
+    if(this.state.sshe4 && this.state.sshe4.att_3 !== undefined) {
+         att3 = parseInt(this.state.sshe4.att_3)
+        }
+        else { att3 = 0; }
+    if(this.state.sshe4 && this.state.sshe4.att_4 !== undefined) {
+          att4 = parseInt(this.state.sshe4.att_4)
+        }
+        else { att4 = 0; }
+    if(this.state.sshe4 && this.state.sshe4.att_5 !== undefined) {
+          att5 = parseInt(this.state.sshe4.att_5)
+          }
+        else { att5 = 0; }
+
+    if(this.state.sshe4 && this.state.sshe4.att_6 !== undefined) {
+          att6 = parseInt(this.state.sshe4.att_6)
+          }
+        else { att6 = 0; }
+
+    if(this.state.sshe4 && this.state.sshe4.att_7 !== undefined) {
+          att7 = parseInt(this.state.sshe4.att_7)
+          }
+    else { att7 = 0; }
+
+    if(this.state.sshe4 && this.state.sshe4.att_8 !== undefined) {
+      att8 = parseInt(this.state.sshe4.att_8)
+      }
+  else { att8 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_9 !== undefined) {
+    att9 = parseInt(this.state.sshe4.att_9)
+    }
+  else { att9 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_10 !== undefined) {
+    att10 = parseInt(this.state.sshe4.att_10)
+    }
+  else { att10 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_11 !== undefined) {
+    att11 = parseInt(this.state.sshe4.att_11)
+    }
+  else { att11 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_12 !== undefined) {
+    att12 = parseInt(this.state.sshe4.att_12)
+    }
+  else { att12 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_13 !== undefined) {
+    att13 = parseInt(this.state.sshe4.att_13)
+    }
+  else { att13 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_14 !== undefined) {
+    att14 = parseInt(this.state.sshe4.att_14)
+    }
+  else { att14 = 0; }
+
+  if(this.state.sshe4 && this.state.sshe4.att_15 !== undefined) {
+    att15 = parseInt(this.state.sshe4.att_15)
+    }
+  else { att15 = 0; }
+
+
+        total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6) + parseInt(att7) + parseInt(att8) + parseInt(att9) + parseInt(att10) + parseInt(att11) + parseInt(att12) + parseInt(att13) + parseInt(att14) + parseInt(att15);
+        console.log('The Total: ' + total);
+
+        let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10,  att_11: att11,  att_12: att12,  att_13: att13,  att_14: att14,  att_15: att15 };
+        let coreval = JSON.stringify(corearray);
+
+        cookie.setItem(name,coreval)//for cookie
+        this.setState({ sshe4: corearray });//for state
+
+        alert("Safety Security Data has been saved... :-) ")
+        }
+//end SSHE
+
 
 render() {
   const {
@@ -2136,10 +2521,10 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Learning Environment</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleLearn1(e)} > Edit Classroom >> {insttotallearn1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleLearn2(e)} > Edit Laboratory  >> {insttotallearn2} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleLearn3(e)} > Edit Teaching Aids  >> {insttotallearn3} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleLearn4(e)} > Edit Outdoor  >> {insttotallearn4} score </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleLearn1(e)} > Edit Classroom  </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleLearn2(e)} > Edit Laboratory  </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleLearn3(e)} > Edit Teaching Aids  </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleLearn4(e)} > Edit Outdoor  </button>  &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -2148,10 +2533,10 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Student Development</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleTotal1(e)} > Edit Games & Sports >> {insttotaltotal1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleTotal2(e)} > Edit Other Competitions >> {insttotaltotal2} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleTotal3(e)} > Edit Socials >> {insttotaltotal3} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleTotal4(e)} > Edit Domain relationships >> {insttotaltotal4} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleTotal1(e)} > Edit Games & Sports </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleTotal2(e)} > Edit Other Competitions  </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleTotal3(e)} > Edit Socials  </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleTotal4(e)} > Edit Domain relationships </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -2160,12 +2545,12 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Sustainability</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic) >> {insttotalsus1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) >> {insttotalsus2} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy >> {insttotalsus3}  score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records >> {insttotalsus4} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology >> {insttotalsus5} score </button> &nbsp;&nbsp;&nbsp; <br/>
-          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance >> {insttotalsus6}  score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleSus1(e)} > Edit Capacity Dev. (Academic)  </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus2(e)} > Edit Capacity Dev. (Non-Academic) </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleSus3(e)} > Edit Policy </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleSus4(e)} > Edit Records </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSus5(e)} > Edit Technology </button> &nbsp;&nbsp;&nbsp; <br/>
+          <button className="button is-small is-warning"  onClick={e => this.handleSus6(e)} > Edit Governance </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -2174,8 +2559,8 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Performance</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleAca1(e)} > Edit Internal Academic Performance >> {insttotalaca1} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleAca2(e)} > Edit External Academic Performance >> {insttotalaca2} score </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-warning"  onClick={e => this.handleAca1(e)} > Edit Internal Academic Performance </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleAca2(e)} > Edit External Academic Performance </button> &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -2183,7 +2568,12 @@ render() {
       <Col sm={2}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>SSHE</h4>
-          <p className="score">108</p>
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleSshe1(e)} > Edit Safety</button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleSshe2(e)} > Edit Environmental </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleSshe3(e)} > Edit  Health </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-danger"  onClick={e => this.handleSshe4(e)} > Edit Security </button> &nbsp;&nbsp;&nbsp;
+
         </div>
       </Col>
 
@@ -2217,6 +2607,11 @@ render() {
 
      <AcaInternalModal active = {modalaca1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca1.bind(this)} saveform={this.saveAcademic.bind(this)} academic={this.state.academic1} />
      <AcaExternalModal active = {modalaca2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca2.bind(this)} saveform={this.saveAcademic2.bind(this)} academic={this.state.academic2} />
+
+     <SsheSafetylModal active = {modalsshe1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe1.bind(this)} saveform={this.saveSshe.bind(this)} safety={this.state.sshe1} />
+     <SsheEnvironlModal active = {modalsshe2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe2.bind(this)} saveform={this.saveSshe2.bind(this)} safety={this.state.sshe2} />
+     <SsheHealthlModal active = {modalsshe3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe3.bind(this)} saveform={this.saveSshe3.bind(this)} safety={this.state.sshe3} />
+     <SsheSecuritylModal active = {modalsshe4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe4.bind(this)} saveform={this.saveSshe4.bind(this)} safety={this.state.sshe4} />
 
     </UserLayout>
   </Protected>
