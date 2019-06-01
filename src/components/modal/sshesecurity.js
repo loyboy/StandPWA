@@ -123,20 +123,7 @@ export default class SsheSecuritylModal extends React.PureComponent {
           </div>
         </div>
 
-        <div className="field">
-          <label className="label"> Classroom Ventilation </label>
-          <p className=" help"> Is natural cross ventilation in place for free air exchange? </p>
-          <div className="control">
-          <div className="select is-large">
-            <select name="att_8" onChange={handleInputChange} value= {safety !== null ? safety.att_8 : ''}>
-              <option value=''>Choose---</option>
-              <option value='2'>Excellent</option>
-              <option value='1'>Average</option>
-              <option value='0'>None</option>
-            </select>
-          </div>
-          </div>
-        </div>
+
 
         <div className="field">
           <label className="label"> Visits </label>
@@ -236,6 +223,21 @@ export default class SsheSecuritylModal extends React.PureComponent {
           <div className="control">
           <div className="select is-large">
             <select name="att_15" onChange={handleInputChange} value= {safety !== null ? safety.att_15 : ''}>
+              <option value=''>Choose---</option>
+              <option value='2'>Excellent</option>
+              <option value='1'>Average</option>
+              <option value='0'>None</option>
+            </select>
+          </div>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label"> Functional Quality </label>
+          <p className=" help"> Strictly functionally, are the doors fit for purpose? </p>
+          <div className="control">
+          <div className="select is-large">
+            <select name="att_8" onChange={handleInputChange} value= {safety !== null ? safety.att_8 : ''}>
               <option value=''>Choose---</option>
               <option value='2'>Excellent</option>
               <option value='1'>Average</option>

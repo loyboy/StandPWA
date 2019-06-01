@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Protected from './protected';
 import UserLayout from './user-layout';
@@ -33,6 +34,8 @@ import Parent from './parent'
 import {Container,Row,Col,Form} from 'react-bootstrap';
 import StarRating from '../resources/img/StarRating.png'
 import cookie from '../libs/cookie';
+import Loader from 'react-loader-advanced';
+import Qs from 'qs';
 
 
 export default class Dashboard extends React.PureComponent {
@@ -68,6 +71,8 @@ constructor(props) {
       sshe3: { },
       sshe4: { },
 
+      loaded: false,
+
       job_id:'',
       modalcore:'',
       modalcoree:'',
@@ -97,8 +102,10 @@ constructor(props) {
       showalert: false,
       showothers: false,
       loggedIn: false,
+      loading: false,
 
       instjoblist: [],
+      instjoblistvalues: {},
       insttotalcoreatt: 0,
       insttotalcorelsn:0,
       insttotalcoremne:0,
@@ -127,24 +134,15 @@ constructor(props) {
 componentDidMount() {
   const isLoggedIn = Authenticator.isLoggedIn();
   console.log('Second this called');
-  /**if (isLoggedIn) {
-    this.setState({
-      loggedIn: true,
-    });
-  } else {
-    this.setState({
-      loggedIn: false,
-    });
-  }**/
 
   //Load all jobs for the logged user....
  if (isLoggedIn) {
- let user_logged = JSON.parse(cookie.getItem('users'));
- console.log("User logged: " + Cookies.get('users') );
- let name = user_logged.id + "#jobs";
- let joblist = JSON.parse(cookie.getItem(name));
+ //let user_logged = JSON.parse(cookie.getItem('users'));
+ //console.log("User logged: " + Cookies.get('users') );
+ //let name = user_logged.id + "#jobs";
+ //let joblist = JSON.parse(cookie.getItem(name));
 
- this.setState({ instjoblist: joblist });
+ //this.setState({ instjoblist: joblist });
 
  //load all scores based on JOB_ID---Core Processes Attendance
  //Core Processes--------------------------------
@@ -422,16 +420,163 @@ let totallearn1 = 0
 
  this.setState({ insttotalaca2: totalaca2 });
 
+ //window.location.reload();
  //End Academic
 }
+
+
 
 }
 
 componentWillMount(){
 
   console.log('First this called');
+  const isLoggedIn = Authenticator.isLoggedIn();
+
+  //Load all jobs for the logged user....
+ if (isLoggedIn) {
+ let user_logged = JSON.parse(cookie.getItem('users'));
+ console.log("User logged: " + Cookies.get('users') );
+ let name = user_logged.id + "#jobs";
+ let joblist = JSON.parse(cookie.getItem(name));
+
+ this.setState({ instjoblist: joblist });
+ }
+
+
 }
 
+refreshPage(e) {
+window.location.reload();
+}
+
+handleUploadtoServer(e) {
+
+  let job_id = this.state.job_id;
+  let schid = this.state.instjoblistvalues[0].SCHOOL_ID
+  let schname = this.state.instjoblistvalues[0].SCH_NAME
+  let first = job_id + "#core#coreattendance";
+  let coreprocess1 = JSON.parse( cookie.getItem(first) );
+
+  let first2 = job_id + "#core#corelessonnote";
+  let coreprocess2 = JSON.parse(cookie.getItem(first2));
+
+  let first3 = job_id + "#core#coremne";
+  let coreprocess3 = JSON.parse(cookie.getItem(first3));
+
+  let second = job_id + "#instructor";
+  let instructor = JSON.parse(cookie.getItem(second));
+
+  //learning environment
+  let third = job_id + "#learn#classroom";
+  let learn = JSON.parse(cookie.getItem(third));
+
+  let third2 = job_id + "#learn#laboratory";
+  let learn2 = JSON.parse(cookie.getItem(third2));
+
+  let third3 = job_id + "#learn#teachingaid";
+  let learn3 = JSON.parse(cookie.getItem(third3));
+
+  let third4 = job_id + "#learn#outdoor";
+  let learn4 = JSON.parse(cookie.getItem(third4));
+
+   //student dev
+   let forth = job_id + "#total#games";
+   let student = JSON.parse(cookie.getItem(forth));
+
+   let forth2 = job_id + "#total#others";
+   let student2 = JSON.parse(cookie.getItem(forth2));
+
+   let forth3 = job_id + "#total#socials";
+   let student3 = JSON.parse(cookie.getItem(forth3));
+
+   let forth4 = job_id + "#total#domain";
+   let student4 = JSON.parse(cookie.getItem(forth4));
+
+   //sustainabilty
+   let fifth = job_id + "#sustain#academic";
+   let sustain = JSON.parse(cookie.getItem(fifth));
+
+   let fifth2 = job_id + "#sustain#nonacademic";
+   let sustain2 = JSON.parse(cookie.getItem(fifth2));
+
+   let fifth3 = job_id + "#sustain#policy";
+   let sustain3 = JSON.parse(cookie.getItem(fifth3));
+
+   let fifth4 = job_id + "#sustain#records";
+   let sustain4 = JSON.parse(cookie.getItem(fifth4));
+
+   let fifth5 = job_id + "#sustain#technology";
+   let sustain5 = JSON.parse(cookie.getItem(fifth5));
+
+   let fifth6 = job_id + "#sustain#governance";
+   let sustain6 = JSON.parse(cookie.getItem(fifth6));
+
+   //academic
+   let sixth = job_id + "#academic#int";
+   let academic = JSON.parse(cookie.getItem(sixth));
+
+   let sixth2 = job_id + "#academic#ext";
+   let academic2 = JSON.parse(cookie.getItem(sixth2));
+
+   //sshe
+   let seventh = job_id + "#sshe#safety";
+   let sshe = JSON.parse(cookie.getItem(seventh));
+
+   let seventh2 = job_id + "#sshe#environment";
+   let sshe2 = JSON.parse(cookie.getItem(seventh2));
+
+   let seventh3 = job_id + "#sshe#health";
+   let sshe3 = JSON.parse(cookie.getItem(seventh3));
+
+   let seventh4 = job_id + "#sshe#security";
+   let sshe4 = JSON.parse(cookie.getItem(seventh4));
+
+   let finalobj = {c1:coreprocess1,c2:coreprocess2,c3:coreprocess3,i1:instructor,l1:learn, l2:learn2, l3: learn3, l4: learn4, t1: student,t2: student2,t3: student3,t4: student4, s1:sustain,s2:sustain2,s3:sustain3,s4:sustain4,s5:sustain5,s6:sustain6, a1:academic, a2:academic2, sh1:sshe, sh2: sshe2, sh3: sshe3 , sh4: sshe4, jobid: job_id, schid: schid , schname: schname }
+
+    this.setState({ loading: true });
+/**
+ * //trigger_ratings_
+    axios.interceptors.request.use(config => {
+      window.console.log("Config is now: " + config);
+
+      config.paramsSerializer = params => {
+        // Qs is already included in the Axios package
+        return Qs.stringify(params, {
+          arrayFormat: "brackets",
+          encode: false
+        });
+      };
+
+      return config;
+    });
+**/
+    axios.post('https://other.standbasis.com/upload.php', {
+      finalobj
+    })
+    .then((response) => {
+       if (response.data.error) {
+          this.setState({ loading: false });
+          console.log(response)
+          alert("Error in Upload..Ensure that there is Internet Connectivity.")
+
+          }
+        else {
+          //
+
+          this.setState({ loading: false });
+          console.log(response.data)
+          alert("Success!!..All Data Uploaded successfully")
+
+        }
+    })
+    .catch(function (error) {
+      alert(error);
+      console.log(error);
+      this.setState({ loading: false });
+    });
+
+}
 
 //Onchange Job Combo box
 
@@ -441,6 +586,11 @@ handleSelect(e) {
   const job_id = e.target.value;
   console.log("The Job ID: "+ job_id)
   if (job_id !== "#" ){
+  //let resultObject = search(job_id, this.state.instjoblist);
+
+  let result = this.state.instjoblist.filter( o => o.J_ID === job_id);
+
+  this.setState({ instjoblistvalues: result });
 
   this.setState({ job_id: job_id });//current job ID
   this.setState({ showothers: true });
@@ -465,36 +615,36 @@ handleSelect(e) {
   //learning environment
   let third = job_id + "#learn#classroom";
   let learn = JSON.parse(cookie.getItem(third));
-  this.setState({ learn: learn });
+  this.setState({ learn1: learn });
 
   let third2 = job_id + "#learn#laboratory";
   let learn2 = JSON.parse(cookie.getItem(third2));
-  this.setState({ learn: learn2 });
+  this.setState({ learn2: learn2 });
 
   let third3 = job_id + "#learn#teachingaid";
   let learn3 = JSON.parse(cookie.getItem(third3));
-  this.setState({ learn: learn3 });
+  this.setState({ learn3: learn3 });
 
   let third4 = job_id + "#learn#outdoor";
   let learn4 = JSON.parse(cookie.getItem(third4));
-  this.setState({ learn: learn4 });
+  this.setState({ learn4: learn4 });
 
    //student dev
    let forth = job_id + "#total#games";
    let student = JSON.parse(cookie.getItem(forth));
-   this.setState({ student: student });
+   this.setState({ student1: student });
 
    let forth2 = job_id + "#total#others";
    let student2 = JSON.parse(cookie.getItem(forth2));
-   this.setState({ student: student2 });
+   this.setState({ student2: student2 });
 
    let forth3 = job_id + "#total#socials";
    let student3 = JSON.parse(cookie.getItem(forth3));
-   this.setState({ student: student3 });
+   this.setState({ student3: student3 });
 
    let forth4 = job_id + "#total#domain";
    let student4 = JSON.parse(cookie.getItem(forth4));
-   this.setState({ student: student4 });
+   this.setState({ student4: student4 });
 
    //sustainabilty
    let fifth = job_id + "#sustain#academic";
@@ -544,7 +694,7 @@ handleSelect(e) {
    let sshe3 = JSON.parse(cookie.getItem(seventh3));
    this.setState({ sshe3: sshe3 });
 
-   let seventh4 = job_id + "#sshe#environment";
+   let seventh4 = job_id + "#sshe#security";
    let sshe4 = JSON.parse(cookie.getItem(seventh4));
    this.setState({ sshe4: sshe4 });
   }
@@ -685,8 +835,8 @@ console.log('The Total: ' + total);
 
 let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9 };
 let coreval = JSON.stringify(corearray);
-
-cookie.setItem(name,coreval)//for cookie
+var d = new Date(2020,12,31)
+cookie.setItem(name,coreval,d)//for cookie
 this.setState({ coreprocess1: corearray });//for state
 //this.setState({ showalert: true });//alert show
 alert("Core Attendance Data has been saved... :-) ")
@@ -744,8 +894,9 @@ saveCoreLessonnote = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9, att_10: att10 };
   let coreval = JSON.stringify(corearray);
-  cookie.setItem(name,coreval)
-  //cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)
+  //cookie.setItem(name,coreval,Infinity)//for cookie
   this.setState({ coreprocess2: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Core Lessonnote Data has been saved... :-) ")
@@ -803,8 +954,8 @@ saveCoreLessonnote = (e) => {
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6, att_7: att7 , att_8: att8, att_9: att9, att_10: att10 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ coreprocess3: corearray });//for state
     //this.setState({ showalert: true });//alert show
     alert("Core MNE Data has been saved... :-) ")
@@ -868,8 +1019,8 @@ handleInputChangeInstr = (event) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ instructor: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Instructor Data has been saved... :-) ")
@@ -1013,8 +1164,8 @@ else { att10 = 0; }
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ learn1: corearray });//for state
   //this.setState({ showalert: true });//alert show
   alert("Learn classroom Data has been saved... :-) ")
@@ -1056,15 +1207,15 @@ else { att10 = 0; }
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ learn2: corearray });//for state
 
     alert("Learn outdoor Data has been saved... :-) ")
     }
 
     saveLearn3 = (e) => {
-      let name = this.state.job_id + "#learn#teachingaids";
+      let name = this.state.job_id + "#learn#teachingaid";
 
       let att1, att2 , att3, att4, att5 = 0;
       let total = 0;
@@ -1095,8 +1246,8 @@ else { att10 = 0; }
 
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
       let coreval = JSON.stringify(corearray);
-
-      cookie.setItem(name,coreval)//for cookie
+      var d = new Date(2020,12,31)
+      cookie.setItem(name,coreval,d)//for cookie
       this.setState({ learn3: corearray });//for state
 
       alert("Learn Teaching aids Data has been saved... :-) ")
@@ -1134,11 +1285,11 @@ else { att10 = 0; }
 
         let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
         let coreval = JSON.stringify(corearray);
-
-        cookie.setItem(name,coreval)//for cookie
+        var d = new Date(2020,12,31)
+        cookie.setItem(name,coreval,d)//for cookie
         this.setState({ learn4: corearray });//for state
 
-        alert("Learn Teaching aids Data has been saved... :-) ")
+        alert("Learn Outdoor Data has been saved... :-) ")
         }
 //End Learn classroom
 
@@ -1297,8 +1448,8 @@ saveTotal1 = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ student1: corearray });//for state
 
   alert("Total Human Dev. games & sports Data has been saved... :-) ")
@@ -1363,8 +1514,8 @@ saveTotal1 = (e) => {
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11  };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ student2: corearray });//for state
 
     alert("Total Human Dev. Others Data has been saved... :-) ")
@@ -1425,8 +1576,8 @@ saveTotal1 = (e) => {
 
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
       let coreval = JSON.stringify(corearray);
-
-      cookie.setItem(name,coreval)//for cookie
+      var d = new Date(2020,12,31)
+      cookie.setItem(name,coreval,d)//for cookie
       this.setState({ student3: corearray });//for state
 
       alert("Total Human Dev. SOcials Data has been saved... :-) ")
@@ -1473,8 +1624,8 @@ saveTotal1 = (e) => {
 
         let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7 };
         let coreval = JSON.stringify(corearray);
-
-        cookie.setItem(name,coreval)//for cookie
+        var d = new Date(2020,12,31)
+        cookie.setItem(name,coreval,d)//for cookie
         this.setState({ student4: corearray });//for state
 
         alert("Total Human Dev. Domain Data has been saved... :-) ")
@@ -1652,8 +1803,8 @@ saveSustain1 = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ sustain1: corearray });//for state
 
   alert("Sustainabilty Academic Data has been saved... :-) ")
@@ -1715,8 +1866,8 @@ saveSustain2 = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ sustain2: corearray });//for state
 
   alert("Sustainabilty Non-Academic Data has been saved... :-) ")
@@ -1840,8 +1991,8 @@ saveSustain2 = (e) => {
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10, att_11: att11 , att_12: att12 , att_13: att13 , att_14: att14 , att_15: att15, att_16: att16, att_17: att17, att_18: att18, att_19: att19, att_20: att20, att_21: att21, att_22: att22, att_23: att23 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ sustain3: corearray });//for state
 
     alert("Sustain policy Data has been saved... :-) ")
@@ -1880,8 +2031,8 @@ saveSustain4 = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ sustain4: corearray });//for state
 
   alert("Sustainabilty Records Data has been saved... :-) ")
@@ -1923,8 +2074,8 @@ saveSustain4 = (e) => {
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ sustain5: corearray });//for state
 
     alert("Sustainabilty Technology Data has been saved... :-) ")
@@ -1963,8 +2114,8 @@ saveSustain4 = (e) => {
 
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
       let coreval = JSON.stringify(corearray);
-
-      cookie.setItem(name,coreval)//for cookie
+      var d = new Date(2020,12,31)
+      cookie.setItem(name,coreval,d)//for cookie
       this.setState({ sustain6: corearray });//for state
 
       alert("Sustainabilty Governance Data has been saved... :-) ")
@@ -2051,8 +2202,8 @@ saveAcademic = (e) => {
 
   let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 ,  att_6: att6 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ academic1: corearray });//for state
 
   alert("Academic Internal Data has been saved... :-) ")
@@ -2086,9 +2237,9 @@ saveAcademic = (e) => {
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
-    this.setState({ academic1: corearray });//for state
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
+    this.setState({ academic2: corearray });//for state
 
     alert("Academic External Data has been saved... :-) ")
     }
@@ -2224,13 +2375,13 @@ if(this.state.sshe1 && this.state.sshe1.att_10 !== undefined) {
 else { att10 = 0; }
 
 
-  total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6);
+  total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) + parseInt(att6) + parseInt(att7) + + parseInt(att8) + parseInt(att9) + parseInt(att10);
   console.log('The Total: ' + total);
 
-  let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 ,  att_6: att6 };
+  let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 ,  att_6: att6 , att_7: att7, att_8: att8, att_9: att9, att_10: att10 };
   let coreval = JSON.stringify(corearray);
-
-  cookie.setItem(name,coreval)//for cookie
+  var d = new Date(2020,12,31)
+  cookie.setItem(name,coreval,d)//for cookie
   this.setState({ sshe1: corearray });//for state
 
   alert("Safety SSHE Data has been saved... :-) ")
@@ -2262,8 +2413,8 @@ else { att10 = 0; }
 
     let corearray = { att_1: att1, att_2: att2, att_3: att3 };
     let coreval = JSON.stringify(corearray);
-
-    cookie.setItem(name,coreval)//for cookie
+    var d = new Date(2020,12,31)
+    cookie.setItem(name,coreval,d)//for cookie
     this.setState({ sshe2: corearray });//for state
 
     alert("Safety Environment Data has been saved... :-) ")
@@ -2352,8 +2503,8 @@ else { att15 = 0; }
 
       let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10,  att_11: att11,  att_12: att12,  att_13: att13,  att_14: att14,  att_15: att15 };
       let coreval = JSON.stringify(corearray);
-
-      cookie.setItem(name,coreval)//for cookie
+      var d = new Date(2020,12,31)
+      cookie.setItem(name,coreval,d)//for cookie
       this.setState({ sshe3: corearray });//for state
 
       alert("Safety Health Data has been saved... :-) ")
@@ -2443,8 +2594,8 @@ else { att15 = 0; }
 
         let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5, att_6: att6,  att_7: att7,  att_8: att8,  att_9: att9,  att_10: att10,  att_11: att11,  att_12: att12,  att_13: att13,  att_14: att14,  att_15: att15 };
         let coreval = JSON.stringify(corearray);
-
-        cookie.setItem(name,coreval)//for cookie
+        var d = new Date(2020,12,31)
+        cookie.setItem(name,coreval,d)//for cookie
         this.setState({ sshe4: corearray });//for state
 
         alert("Safety Security Data has been saved... :-) ")
@@ -2457,33 +2608,48 @@ render() {
    modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 ,
    modaltotal1, modaltotal2, modaltotal3, modaltotal4,
    modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6, modalaca1, modalaca2, modalsshe1,  modalsshe2,  modalsshe3 ,  modalsshe4 ,
-   loggedIn,
+   loggedIn, loading,
    instjoblist, insttotalcoreatt, insttotalcorelsn, insttotalcoremne ,
    insttotalinstr,insttotallearn1,insttotallearn2,insttotallearn3,insttotallearn4,
    insttotaltotal1,insttotaltotal2,insttotaltotal3,insttotaltotal4,
    insttotalsus1,insttotalsus2,insttotalsus3,insttotalsus4,insttotalsus5,insttotalsus6,
-   insttotalaca1, insttotalaca2
+   insttotalaca1, insttotalaca2,
+   instjoblistvalues
   } = this.state;
-
-
-
-
 
   return (
   <Protected>
     <UserLayout>
-
+      <Loader show={loading} message={'Please wait...'}>
 
 
     <div className="level">
+
+    <div className={this.state.showothers ? 'level-right' : 'hidden'}>
     <div className="level-item has-text-centered">
-      <div className="field">
+        <div className="field">
+
+         <p className="control">
+          <a className="button is-link" onClick={e => this.handleUploadtoServer(e)}>
+            Upload to Server
+          </a>
+       </p>
+
+        </div>
+    </div>
+    </div>
+
+    <div className="level-left">
+    <div className="level-item has-text-centered">
+        <div className="field">
+
           <label className="label">Choose Job</label>
           <div className="control">
             <div className="select is-large">
               <select onChange={e => this.handleSelect(e)}>
               <option value= "#">Choose...</option>
-              { instjoblist.map( (link,i) =>
+
+              { instjoblist && instjoblist.map( (link,i) =>
               <option key={i} value={link.J_ID}> {link.J_NAME} </option>
               )
               }
@@ -2491,8 +2657,33 @@ render() {
               </select>
             </div>
           </div>
+
+          <p className={!this.state.showothers ? 'control' : 'hidden'} style={ { marginTop: '10px'  } } >
+            <a className="button is-danger" onClick={e => this.refreshPage(e)}>
+            Refresh page
+            </a>
+          </p>
+
+
         </div>
-      </div>
+    </div>
+    </div>
+
+    <div className={this.state.showothers ? 'level-right' : 'hidden'}>
+    <div className=" level-item ">
+        <article className="message is-danger">
+            <div className="message-header">
+              <p>Information about JOB</p>
+
+            </div>
+            <div className="message-body">
+            <p> <b>School: </b> {instjoblistvalues.length > 0 && instjoblistvalues[0].SCH_NAME}  </p>
+            <p> <b>Surveyor Name: </b> {instjoblistvalues.length > 0 && instjoblistvalues[0].J_CONTACTNAME}  </p>
+            <p> <b>Job Count: </b> {instjoblistvalues.length > 0 && instjoblistvalues[0].JOB_COUNT}  </p>
+            </div>
+        </article>
+    </div>
+    </div>
     </div>
 
 
@@ -2503,9 +2694,9 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Core Processes</h4>
           <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleCore(e)} > Edit Attendance >> {insttotalcoreatt} score </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleCore2(e)} > Edit Lessonnote  >> {insttotalcorelsn} score </button>  &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-success"  onClick={e => this.handleCore3(e)} > Edit M&E  >> {insttotalcoremne} score </button>
+          <button className="button is-small is-warning"  onClick={e => this.handleCore(e)} > Edit Attendance  </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleCore2(e)} > Edit Lessonnote   </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-success"  onClick={e => this.handleCore3(e)} > Edit M&E  </button>
         </div>
       </Col>
 
@@ -2513,7 +2704,7 @@ render() {
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
           <h4>Instructor Resource</h4>
           <p className="score"></p>
-          &nbsp;&nbsp;&nbsp; <button className="button is-small is-warning"  onClick={e => this.handleInst(e)} > Edit Instructor Resource >> {insttotalinstr} score </button>
+          &nbsp;&nbsp;&nbsp; <button className="button is-small is-warning"  onClick={e => this.handleInst(e)} > Edit Instructor Resource  </button>
         </div>
       </Col>
 
@@ -2591,7 +2782,7 @@ render() {
      <LearnTeachingModal active = {modallearn3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn3.bind(this)} saveform={this.saveLearn3.bind(this)} learnteaching={this.state.learn3} />
      <LearnOutdoorModal active = {modallearn4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn4.bind(this)} saveform={this.saveLearn4.bind(this)} learnoutdoor={this.state.learn4} />
 
-     <TotalGamesModal active = {modaltotal1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal1.bind(this)} saveform={this.saveTotal1.bind(this)} totalgames={this.state.sustain3} />
+     <TotalGamesModal active = {modaltotal1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal1.bind(this)} saveform={this.saveTotal1.bind(this)} totalgames={this.state.student1} />
      <TotalOtherModal active = {modaltotal2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal2.bind(this)} saveform={this.saveTotal2.bind(this)} totalother={this.state.student2} />
      <TotalSocialModal active = {modaltotal3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal3.bind(this)} saveform={this.saveTotal3.bind(this)} totalsocials={this.state.student3} />
      <TotalDomainModal active = {modaltotal4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal4.bind(this)} saveform={this.saveTotal4.bind(this)} totaldomain={this.state.student4} />
@@ -2613,6 +2804,7 @@ render() {
      <SsheHealthlModal active = {modalsshe3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe3.bind(this)} saveform={this.saveSshe3.bind(this)} safety={this.state.sshe3} />
      <SsheSecuritylModal active = {modalsshe4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe4.bind(this)} saveform={this.saveSshe4.bind(this)} safety={this.state.sshe4} />
 
+        </Loader>
     </UserLayout>
   </Protected>
 

@@ -135,7 +135,7 @@ export default class CoreLsnModal extends React.PureComponent {
 
         <div className="field">
           <label className="label">Quality? </label>
-          <p className="help">Are submissions and approvals within the stipulated days by school policy or tradition? </p>
+          <p className="help">Average cycle of 4 LNs </p>
           <div className="control">
           <div className="select is-large">
 
@@ -152,7 +152,7 @@ export default class CoreLsnModal extends React.PureComponent {
 
         <div className="field">
           <label className="label">Completion? </label>
-          <p className="help">Are completion within times </p>
+          <p className="help">Are completion within times? </p>
           <div className="control">
           <div className="select is-large">
 

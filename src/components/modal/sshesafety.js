@@ -23,9 +23,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= {safety !== null ? safety.att_1 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -38,9 +38,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {safety !== null ? safety.att_2 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -54,9 +54,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {safety !== null ? safety.att_3 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
 
             </select>
           </div>
@@ -70,9 +70,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {safety !== null ? safety.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -85,9 +85,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {safety !== null ? safety.att_5 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -100,9 +100,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {safety !== null ? safety.att_6 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -115,9 +115,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_7" onChange={handleInputChange} value= {safety !== null ? safety.att_7 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -130,9 +130,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_8" onChange={handleInputChange} value= {safety !== null ? safety.att_8 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -145,9 +145,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_9" onChange={handleInputChange} value= {safety !== null ? safety.att_9 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -160,9 +160,9 @@ export default class SsheSafetylModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_10" onChange={handleInputChange} value= {safety !== null ? safety.att_10 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes</option>
+              <option value='1'>Some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>

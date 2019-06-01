@@ -147,8 +147,8 @@ export default class SusPolicyModal extends React.PureComponent {
         </div>
 
         <div className="field">
-          <label className="label"> M&E? </label>
-          <p className=" help"> Is there a policy and or guideline in M&E? </p>
+          <label className="label"> Access Control? </label>
+          <p className=" help"> Is there a policy and or guideline in Access Control? </p>
           <div className="control">
           <div className="select is-large">
             <select name="att_10" onChange={handleInputChange} value= {sustain !== null ? sustain.att_10 : ''}>

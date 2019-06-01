@@ -68,7 +68,7 @@ Is there audio visual facility in each classroom for slides and or video based i
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {learnteaching !== null ? learnteaching.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='2'>Yes</option>
+              <option value='1'>Yes</option>
               <option value='0'>No</option>
 
             </select>

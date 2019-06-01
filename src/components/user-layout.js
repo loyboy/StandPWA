@@ -17,12 +17,17 @@ export default class GuestLayout extends React.PureComponent {
             <nav className="navbar has-shadow" role="navigation" aria-label="main navigation">
               <div className="navbar-brand">
                 <span className="navbar-item">Hey, {user_logged.user} </span>
+
+
+
                 <Link className="navbar-item is--brand" to="/dashboard">
                   Dashboard
                 </Link>
+
                 <Link to="/logout" className="navbar-item is-pulled-right">
                   Logout
                 </Link>
+
               </div>
             </nav>
           </div>

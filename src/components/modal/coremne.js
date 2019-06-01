@@ -16,7 +16,7 @@ export default class CoreMneModal extends React.PureComponent {
 
         <div className="field">
           <label className="label">Operation? </label>
-          <p className=" help">Does the school operate lesson note?</p>
+          <p className=" help">Is M&E  operated for pupils and instructors?</p>
           <div className="control">
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_1 : ''}>
@@ -24,7 +24,7 @@ export default class CoreMneModal extends React.PureComponent {
               <option value='3'>Yes for both</option>
               <option value='1'>Yes for students</option>
               <option value='1'>Yes for teachers</option>
-              <option value='0'>No</option>
+              <option value='0'>Not really</option>
             </select>
           </div>
           </div>
@@ -51,11 +51,11 @@ export default class CoreMneModal extends React.PureComponent {
           <div className="control">
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_3 : ''}>
-              <option value='0'>Choose---</option>
+              <option value=''>Choose---</option>
               <option value='3'>Comprehensive</option>
               <option value='2'>Not Comprehensive</option>
               <option value='1'>Lean</option>
-
+              <option value='0'>Weak</option>
             </select>
           </div>
           </div>
@@ -67,9 +67,10 @@ export default class CoreMneModal extends React.PureComponent {
           <div className="control">
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_4 : ''}>
-              <option value='0'>Choose---</option>
+              <option value=''>Choose---</option>
               <option value='2'>Good</option>
               <option value='1'>Fair</option>
+              <option value='0'>Weak</option>
 
             </select>
           </div>
@@ -83,7 +84,7 @@ export default class CoreMneModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_5 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
             </select>
           </div>
@@ -156,7 +157,7 @@ export default class CoreMneModal extends React.PureComponent {
 
           <select name="att_10" onChange={handleInputChange} value= {coreprocess3 !== null ? coreprocess3.att_10 : ''}>
           <option value=''>Choose---</option>
-          <option value='2'>Yes</option>
+          <option value='5'>Yes</option>
           <option value='0'>No</option>
           </select>
           </div>

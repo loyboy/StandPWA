@@ -56,8 +56,10 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_3 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
-              <option value='0'>No</option>
+              <option value='4'>Yes</option>
+              <option value='2'>Some</option>
+              <option value='1'>Weak</option>
+              <option value='0'>Poor</option>
             </select>
           </div>
           </div>
@@ -70,7 +72,7 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='2'>Yes</option>
+              <option value='1'>Yes</option>
               <option value='0'>No</option>
 
             </select>

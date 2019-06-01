@@ -85,7 +85,8 @@ export default class LearnClassroomModal extends React.PureComponent {
             <select name="att_5" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_5 : ''}>
               <option value=''>Choose---</option>
               <option value='3'>Yes</option>
-              <option value='0'>No</option>
+              <option value='2'>Okay</option>
+              <option value='1'>Not quite</option>
 
             </select>
           </div>
@@ -101,7 +102,8 @@ export default class LearnClassroomModal extends React.PureComponent {
             <select name="att_6" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_6 : ''}>
               <option value=''>Choose---</option>
               <option value='3'>Yes</option>
-              <option value='0'>No</option>
+              <option value='2'>Okay</option>
+              <option value='1'>Not quite</option>
 
             </select>
           </div>
@@ -116,7 +118,8 @@ export default class LearnClassroomModal extends React.PureComponent {
             <select name="att_7" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_7 : ''}>
               <option value=''>Choose---</option>
               <option value='3'>Yes</option>
-              <option value='0'>No</option>
+              <option value='2'>Okay</option>
+              <option value='1'>Not quite</option>
 
             </select>
           </div>
@@ -130,7 +133,9 @@ export default class LearnClassroomModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_8" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_8 : ''}>
               <option value=''>Choose---</option>
-              <option value='2'>Yes</option>
+              <option value='3'>Yes</option>
+              <option value='2'>Okay</option>
+
               <option value='0'>No</option>
 
             </select>
@@ -145,8 +150,9 @@ export default class LearnClassroomModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_9" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_9 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Yes</option>
-              <option value='0'>No</option>
+              <option value='4'>Yes</option>
+              <option value='2'>Fairly</option>
+              <option value='0'>Not quite</option>
 
             </select>
           </div>

@@ -60,8 +60,8 @@ export default class SusTechnologyModal extends React.PureComponent {
             <select name="att_3" onChange={handleInputChange} value= {sustain !== null ? sustain.att_3 : ''}>
               <option value=''>Choose---</option>
               <option value='4'>Transformation</option>
-              <option value='3'>Tools</option>
-              <option value='2'>Typewriter Sub</option>
+              <option value='2'>Tools</option>
+              <option value='1'>Typewriter Sub</option>
 
               <option value='0'>None</option>
 
@@ -92,9 +92,9 @@ export default class SusTechnologyModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {sustain !== null ? sustain.att_5 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
+
             </select>
           </div>
           </div>
@@ -107,9 +107,8 @@ export default class SusTechnologyModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {sustain !== null ? sustain.att_6 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>

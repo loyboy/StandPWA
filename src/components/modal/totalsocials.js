@@ -17,7 +17,7 @@ export default class TotalSocialsModal extends React.PureComponent {
         <section className="modal-card-body">
 
         <div className="field">
-          <label className="label"> Hall? </label>
+          <label className="label"> Theater? </label>
           <p className=" help"> Theater or event hall? </p>
           <div className="control">
           <div className="select is-large">
@@ -38,10 +38,9 @@ export default class TotalSocialsModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {totalsocials !== null ? totalsocials.att_2 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Yes</option>
-              <option value='2'>OK</option>
-              <option value='1'>Low</option>
-              <option value='0'>None</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
+
             </select>
           </div>
           </div>

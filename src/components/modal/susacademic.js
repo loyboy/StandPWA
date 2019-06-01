@@ -33,7 +33,7 @@ export default class SusAcademicModal extends React.PureComponent {
 
         <div className="field">
           <label className="label"> Development Hours? </label>
-          <p className=" help"> </p>
+          <p className=" help"> How many development hours? </p>
           <div className="control">
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {sustain !== null ? sustain.att_2 : ''}>

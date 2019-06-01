@@ -23,7 +23,7 @@ export default class learningOutModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= {learnoutdoor !== null ? learnoutdoor.att_1 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
             </select>
           </div>
@@ -37,7 +37,7 @@ export default class learningOutModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {learnoutdoor !== null ? learnoutdoor.att_2 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
             </select>
           </div>
@@ -51,7 +51,7 @@ export default class learningOutModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {learnoutdoor !== null ? learnoutdoor.att_3 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
             </select>
           </div>
@@ -65,7 +65,7 @@ export default class learningOutModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {learnoutdoor !== null ? learnoutdoor.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
 
             </select>
@@ -80,7 +80,7 @@ export default class learningOutModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {learnoutdoor !== null ? learnoutdoor.att_5 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>Yes</option>
+              <option value='2'>Yes</option>
               <option value='0'>No</option>
 
             </select>

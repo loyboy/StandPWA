@@ -27,7 +27,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>0.65 : 0.79</option>
               <option value='3'>0.50 : 0.64</option>
               <option value='2'>0.35 : 0.49</option>
-              <option value='1'> less than 0.35</option>
+              <option value='0'> less than 0.35</option>
             </select>
           </div>
           </div>
@@ -44,7 +44,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>0.65 : 0.79</option>
               <option value='3'>0.50 : 0.64</option>
               <option value='2'>0.35 : 0.49</option>
-              <option value='1'> less than 0.35</option>
+              <option value='0'> less than 0.35</option>
             </select>
           </div>
           </div>
@@ -62,7 +62,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>0.65 : 0.79</option>
               <option value='3'>0.50 : 0.64</option>
               <option value='2'>0.35 : 0.49</option>
-              <option value='1'> less than 0.35</option>
+              <option value='0'> less than 0.35</option>
 
             </select>
           </div>
@@ -80,7 +80,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>0.65 : 0.79</option>
               <option value='3'>0.50 : 0.64</option>
               <option value='2'>0.35 : 0.49</option>
-              <option value='1'> less than 0.35</option>
+              <option value='0'> less than 0.35</option>
 
 
             </select>
@@ -99,7 +99,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>0.65 : 0.79</option>
               <option value='3'>0.50 : 0.64</option>
               <option value='2'>0.35 : 0.49</option>
-              <option value='1'> less than 0.35</option>
+              <option value='0'> less than 0.35</option>
 
             </select>
           </div>
@@ -108,7 +108,7 @@ export default class InstrResourceModal extends React.PureComponent {
 
         <div className="field">
           <label className="label">Employee/Part-time ? </label>
-          <p className="help"> How may on the teaching staff are fulltime employees and how may are adjunct? </p>
+          <p className="help"> How of the teaching staff are fulltime employees and are adjunct too? </p>
           <div className="control">
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {instructor !== null ? instructor.att_6 : ''}>
@@ -117,7 +117,7 @@ export default class InstrResourceModal extends React.PureComponent {
               <option value='4'>less than equal to 20%</option>
               <option value='3'>less than equal to 30%</option>
               <option value='2'>greater than 30%</option>
-
+              <option value='0'> None </option>
             </select>
           </div>
           </div>

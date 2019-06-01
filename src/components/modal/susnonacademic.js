@@ -32,8 +32,8 @@ export default class SusNonAcademicModal extends React.PureComponent {
         </div>
 
         <div className="field">
-          <label className="label"> Development Hours? </label>
-          <p className=" help"> </p>
+          <label className="label"> Development Hours in calendar program actually accomplished? </label>
+          <p className=" help"> How many development hours? </p>
           <div className="control">
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {sustain !== null ? sustain.att_2 : ''}>
@@ -159,8 +159,8 @@ export default class SusNonAcademicModal extends React.PureComponent {
               <option value=''>Choose---</option>
 
               <option value='2'>less than 30%</option>
-              <option value='1'>more than 30%</option>
-              <option value='0'>None</option>
+              <option value='1'>approx. 30%</option>
+              <option value='0'>more than 30%</option>
 
             </select>
           </div>
@@ -174,7 +174,7 @@ export default class SusNonAcademicModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_10" onChange={handleInputChange} value= {sustain !== null ? sustain.att_10 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Hign</option>
+              <option value='3'>High</option>
               <option value='2'>Good</option>
               <option value='1'>Less</option>
               <option value='0'>None</option>

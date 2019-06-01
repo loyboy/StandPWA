@@ -23,7 +23,7 @@ export default class TotalDomainModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_1" onChange={handleInputChange} value= { totaldomain !== null ? totaldomain.att_1 : '' }>
               <option value=''>Choose---</option>
-              <option value='2'>Yes </option>
+              <option value='1'>Yes </option>
               <option value='0'>No</option>
 
             </select>

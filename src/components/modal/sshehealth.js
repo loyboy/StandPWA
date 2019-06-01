@@ -25,7 +25,7 @@ Is there provision for potable water and is provided for the students use? If ye
             <select name="att_1" onChange={handleInputChange} value= {safety !== null ? safety.att_1 : ''}>
               <option value=''>Choose---</option>
               <option value='3'>Yes Good</option>
-              <option value='2'>Yes Some</option>
+              <option value='1'>Yes Some</option>
               <option value='0'>None</option>
 
             </select>
@@ -40,9 +40,9 @@ Is there provision for potable water and is provided for the students use? If ye
           <div className="select is-large">
             <select name="att_2" onChange={handleInputChange} value= {safety !== null ? safety.att_2 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
+
             </select>
           </div>
           </div>
@@ -56,9 +56,9 @@ Is there provision for potable water and is provided for the students use? If ye
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {safety !== null ? safety.att_3 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes Good</option>
+              <option value='1'>Yes some</option>
+              <option value='0'>None</option>
 
             </select>
           </div>
@@ -72,9 +72,9 @@ Is there provision for potable water and is provided for the students use? If ye
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {safety !== null ? safety.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes Good</option>
+              <option value='1'>Yes some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -87,9 +87,9 @@ Is there provision for potable water and is provided for the students use? If ye
           <div className="select is-large">
             <select name="att_5" onChange={handleInputChange} value= {safety !== null ? safety.att_5 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
+
             </select>
           </div>
           </div>
@@ -103,9 +103,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_6" onChange={handleInputChange} value= {safety !== null ? safety.att_6 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -118,9 +117,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_7" onChange={handleInputChange} value= {safety !== null ? safety.att_7 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -133,9 +131,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_8" onChange={handleInputChange} value= {safety !== null ? safety.att_8 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -148,9 +145,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_9" onChange={handleInputChange} value= {safety !== null ? safety.att_9 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -163,9 +159,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_10" onChange={handleInputChange} value= {safety !== null ? safety.att_10 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -173,14 +168,13 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
 
         <div className="field">
           <label className="label"> Plan </label>
-          <p className=" help"> Is the temperature ambience of the classroom good enough for children to spend long hours in and learning? Do we have health emergency plan that covers child health emergencies? </p>
+          <p className=" help"> Do we have health emergency plan that covers child health emergencies?? </p>
           <div className="control">
           <div className="select is-large">
             <select name="att_11" onChange={handleInputChange} value= {safety !== null ? safety.att_11 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -194,9 +188,9 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_12" onChange={handleInputChange} value= {safety !== null ? safety.att_12 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes good</option>
+              <option value='1'>Yes some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -209,9 +203,8 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_13" onChange={handleInputChange} value= {safety !== null ? safety.att_13 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='1'>Yes</option>
+              <option value='0'>No</option>
             </select>
           </div>
           </div>
@@ -225,9 +218,9 @@ Is there Ease of reading the board or screen and moving aroundIs there Ease of r
           <div className="select is-large">
             <select name="att_14" onChange={handleInputChange} value= {safety !== null ? safety.att_14 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes good</option>
+              <option value='1'>Yes some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
@@ -241,9 +234,9 @@ Does the school have call-up understanding with a health service provider, publi
           <div className="select is-large">
             <select name="att_14" onChange={handleInputChange} value= {safety !== null ? safety.att_14 : ''}>
               <option value=''>Choose---</option>
-              <option value='3'>Excellent</option>
-              <option value='2'>Good</option>
-              <option value='1'>Bad</option>
+              <option value='3'>Yes good</option>
+              <option value='1'>Yes some</option>
+              <option value='0'>None</option>
             </select>
           </div>
           </div>
