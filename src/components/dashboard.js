@@ -11,6 +11,7 @@ import LearnClassroomModal from './modal/learnclassroom'
 import LearnLaboratoryModal from './modal/learnlaboratory'
 import LearnTeachingModal from './modal/learnteachingaids'
 import LearnOutdoorModal from './modal/learnoutdoor'
+import LearnLibraryModal from './modal/learnlibrary'
 import TotalGamesModal from './modal/totalgames'
 import TotalOtherModal from './modal/totalothers'
 import TotalDomainModal from './modal/totaldomain'
@@ -30,12 +31,9 @@ import SsheSecuritylModal from './modal/sshesecurity'
 import AlertModal from './alert'
 import Cookies from 'js-cookie';
 import Authenticator from './fake-authenticator';
-import Parent from './parent'
-import {Container,Row,Col,Form} from 'react-bootstrap';
-import StarRating from '../resources/img/StarRating.png'
+import {Col} from 'react-bootstrap';
 import cookie from '../libs/cookie';
 import Loader from 'react-loader-advanced';
-import Qs from 'qs';
 
 
 export default class Dashboard extends React.PureComponent {
@@ -54,6 +52,7 @@ constructor(props) {
       learn2: { }, //learn laboratory
       learn3: { }, //teaching aids
       learn4: { }, //learn outdoor
+      learn5: { }, //learn library
       student1: { }, //total games & sports
       student2: { }, //total other comp
       student3: { }, //total other socials
@@ -82,6 +81,7 @@ constructor(props) {
       modallearn2:'',
       modallearn3:'',
       modallearn4:'',
+      modallearn5:'',
       modaltotal1:'',
       modaltotal2:'',
       modaltotal3:'',
@@ -114,6 +114,7 @@ constructor(props) {
       insttotallearn2:0,
       insttotallearn3:0,
       insttotallearn4:0,
+      insttotallearn5:0,
       insttotaltotal1:0,
       insttotaltotal2:0,
       insttotaltotal3:0,
@@ -254,8 +255,20 @@ let totallearn1 = 0
 
  this.setState({ insttotallearn4: totallearn4 });
 
+ let totallearn5 = 0
+ if (this.state.job_id !== ''){
+   let name = this.state.job_id + "#learn#library";
+
+   let learn5 = JSON.parse(cookie.getItem(name));
+   for (var key in learn5) {
+     totallearn5 += learn5[key];
+   }
+ }
+
+ this.setState({ insttotallearn4: totallearn5 });
+
  let totallearnx = 0
- totallearnx = totallearn1 + totallearn2 + totallearn3 + totallearn4;
+ totallearnx = totallearn1 + totallearn2 + totallearn3 + totallearn4  + totallearn5;
  //end learn environment----------------------------------
 
  //total dev env
@@ -417,33 +430,21 @@ let totallearn1 = 0
     totalaca2 += total2[key];
    }
  }
-
  this.setState({ insttotalaca2: totalaca2 });
-
- //window.location.reload();
- //End Academic
 }
-
-
-
 }
 
 componentWillMount(){
-
   console.log('First this called');
   const isLoggedIn = Authenticator.isLoggedIn();
-
   //Load all jobs for the logged user....
  if (isLoggedIn) {
  let user_logged = JSON.parse(cookie.getItem('users'));
  console.log("User logged: " + Cookies.get('users') );
  let name = user_logged.id + "#jobs";
  let joblist = JSON.parse(cookie.getItem(name));
-
  this.setState({ instjoblist: joblist });
  }
-
-
 }
 
 refreshPage(e) {
@@ -479,6 +480,9 @@ handleUploadtoServer(e) {
 
   let third4 = job_id + "#learn#outdoor";
   let learn4 = JSON.parse(cookie.getItem(third4));
+
+  let third5 = job_id + "#learn#library";
+  let learn5 = JSON.parse(cookie.getItem(third5));
 
    //student dev
    let forth = job_id + "#total#games";
@@ -532,7 +536,7 @@ handleUploadtoServer(e) {
    let seventh4 = job_id + "#sshe#security";
    let sshe4 = JSON.parse(cookie.getItem(seventh4));
 
-   let finalobj = {c1:coreprocess1,c2:coreprocess2,c3:coreprocess3,i1:instructor,l1:learn, l2:learn2, l3: learn3, l4: learn4, t1: student,t2: student2,t3: student3,t4: student4, s1:sustain,s2:sustain2,s3:sustain3,s4:sustain4,s5:sustain5,s6:sustain6, a1:academic, a2:academic2, sh1:sshe, sh2: sshe2, sh3: sshe3 , sh4: sshe4, jobid: job_id, schid: schid , schname: schname }
+   let finalobj = {c1:coreprocess1,c2:coreprocess2,c3:coreprocess3,i1:instructor,l1:learn, l2:learn2, l3: learn3, l4: learn4, l5: learn5, t1: student,t2: student2,t3: student3,t4: student4, s1:sustain,s2:sustain2,s3:sustain3,s4:sustain4,s5:sustain5,s6:sustain6, a1:academic, a2:academic2, sh1:sshe, sh2: sshe2, sh3: sshe3 , sh4: sshe4, jobid: job_id, schid: schid , schname: schname }
 
     this.setState({ loading: true });
 /**
@@ -567,7 +571,8 @@ handleUploadtoServer(e) {
           this.setState({ loading: false });
           console.log(response.data)
           alert("Success!!..All Data Uploaded successfully")
-
+          Authenticator.logout()
+          window.location.reload()
         }
     })
     .catch(function (error) {
@@ -628,6 +633,10 @@ handleSelect(e) {
   let third4 = job_id + "#learn#outdoor";
   let learn4 = JSON.parse(cookie.getItem(third4));
   this.setState({ learn4: learn4 });
+
+  let third5 = job_id + "#learn#library";
+  let learn5 = JSON.parse(cookie.getItem(third5));
+  this.setState({ learn4: learn5 });
 
    //student dev
    let forth = job_id + "#total#games";
@@ -727,7 +736,13 @@ handleCore3(e) {
 handleClose = (e) => {
   if (e && e.preventDefault) e.preventDefault();
   console.log("Core values Changed");
-  this.setState({ modalcore: '', modalcoree: '',  modalcoreee: '', showalert: false,  modalinst: '', modallearn1: '', modallearn2: '', modallearn3: '', modallearn4: '',
+  this.setState({ modalcore: '', modalcoree: '',  modalcoreee: '', showalert: false,
+      modalinst: '',
+      modallearn1: '',
+      modallearn2: '',
+      modallearn3: '',
+      modallearn4: '',
+      modallearn5: '',
       modaltotal1:'',
       modaltotal2:'',
       modaltotal3:'',
@@ -1083,6 +1098,19 @@ handleInputChangeLearn1 = (event) => {
  console.log(this.state.learn4)
  }
 
+ handleInputChangeLearn5 = (event) => {
+  const target = event.target;
+   const value = target.type === 'checkbox' ? target.checked : target.value;
+   const name = target.name;
+   this.setState({
+    learn5: {
+        ...this.state.learn5,
+        [name]: value
+     }
+ });
+    console.log(this.state.learn5)
+ }
+
  handleLearn1(e) {
   if (e && e.preventDefault) e.preventDefault();
   console.log("Modal Learn 1 jus ran");
@@ -1105,6 +1133,12 @@ handleLearn4(e) {
   if (e && e.preventDefault) e.preventDefault();
   console.log("Modal Learn 4 jus ran");
   this.setState({ modallearn4: 'is-active' });
+}
+
+handleLearn5(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  console.log("Modal Learn 5 jus ran");
+  this.setState({ modallearn5: 'is-active' });
 }
 
  saveLearn1 = (e) => {
@@ -1290,6 +1324,45 @@ else { att10 = 0; }
         this.setState({ learn4: corearray });//for state
 
         alert("Learn Outdoor Data has been saved... :-) ")
+      }
+
+      saveLearn5 = (e) => {
+        let name = this.state.job_id + "#learn#library";
+
+        let att1, att2 , att3, att4, att5 = 0;
+        let total = 0;
+
+        if(this.state.learn5 && this.state.learn5.att_1 !== undefined ) {
+             att1 = parseInt(this.state.learn5.att_1)
+        }
+           else { att1 = 0; }
+        if(this.state.learn5 && this.state.learn5.att_2 !== undefined) {
+             att2 = parseInt(this.state.learn5.att_2)
+        }
+            else { att2 = 0; }
+        if(this.state.learn5 && this.state.learn5.att_3 !== undefined) {
+             att3 = parseInt(this.state.learn5.att_3)
+            }
+            else { att3 = 0; }
+        if(this.state.learn5 && this.state.learn5.att_4 !== undefined) {
+              att4 = parseInt(this.state.learn5.att_4)
+            }
+            else { att4 = 0; }
+        if(this.state.learn5 && this.state.learn5.att_5 !== undefined) {
+              att5 = parseInt(this.state.learn5.att_5)
+              }
+            else { att5 = 0; }
+
+        total = parseInt(att1) + parseInt(att2) + parseInt(att3) + parseInt(att4) + parseInt(att5) ;
+        console.log('The Total of Learn Library: ' + total);
+
+        let corearray = { att_1: att1, att_2: att2, att_3: att3, att_4: att4, att_5: att5 };
+        let coreval = JSON.stringify(corearray);
+        var d = new Date(2020,12,31) //Expiry date of cookie
+        cookie.setItem(name,coreval,d)//for cookie
+        this.setState({ learn5: corearray });//for state
+
+        alert("Learn Library Data has been saved... :-) ")
         }
 //End Learn classroom
 
@@ -2605,7 +2678,7 @@ else { att15 = 0; }
 
 render() {
   const {
-   modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 ,
+   modalcore, modalcoree, modalcoreee, modalinst, modallearn1, modallearn2, modallearn3, modallearn4 , modallearn5,
    modaltotal1, modaltotal2, modaltotal3, modaltotal4,
    modalsus1, modalsus2, modalsus3, modalsus4, modalsus5, modalsus6, modalaca1, modalaca2, modalsshe1,  modalsshe2,  modalsshe3 ,  modalsshe4 ,
    loggedIn, loading,
@@ -2630,7 +2703,7 @@ render() {
         <div className="field">
 
          <p className="control">
-          <a className="button is-link" onClick={e => this.handleUploadtoServer(e)}>
+          <a className="button is-link" onClick={(e) => { if (window.confirm('Are you sure you wish to Upload data to Server? \r It cannot be undone once it is done. ')) this.handleUploadtoServer(e) } } >
             Upload to Server
           </a>
        </p>
@@ -2686,8 +2759,6 @@ render() {
     </div>
     </div>
 
-
-
     <div className="level" >
       <div className="column">
 			<Col md={4}>
@@ -2716,6 +2787,7 @@ render() {
           <button className="button is-small is-info"  onClick={e => this.handleLearn2(e)} > Edit Laboratory  </button>  &nbsp;&nbsp;&nbsp;
           <button className="button is-small is-success"  onClick={e => this.handleLearn3(e)} > Edit Teaching Aids  </button>  &nbsp;&nbsp;&nbsp;
           <button className="button is-small is-danger"  onClick={e => this.handleLearn4(e)} > Edit Outdoor  </button>  &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleLearn5(e)} > Edit Library  </button>  &nbsp;&nbsp;&nbsp;
 
         </div>
       </Col>
@@ -2746,15 +2818,7 @@ render() {
         </div>
       </Col>
 
-			<Col sm={2}>
-        <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
-          <h4>Performance</h4>
-          <p className="score"></p>
-          <button className="button is-small is-warning"  onClick={e => this.handleAca1(e)} > Edit Internal Academic Performance </button> &nbsp;&nbsp;&nbsp;
-          <button className="button is-small is-info"  onClick={e => this.handleAca2(e)} > Edit External Academic Performance </button> &nbsp;&nbsp;&nbsp;
 
-        </div>
-      </Col>
 
       <Col sm={2}>
         <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
@@ -2781,6 +2845,8 @@ render() {
      <LearnLaboratoryModal active = {modallearn2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn2.bind(this)} saveform={this.saveLearn2.bind(this)} learnlaboratory={this.state.learn2} />
      <LearnTeachingModal active = {modallearn3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn3.bind(this)} saveform={this.saveLearn3.bind(this)} learnteaching={this.state.learn3} />
      <LearnOutdoorModal active = {modallearn4} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn4.bind(this)} saveform={this.saveLearn4.bind(this)} learnoutdoor={this.state.learn4} />
+     <LearnLibraryModal active = {modallearn5} handleClose={this.handleClose} handleInputChange={this.handleInputChangeLearn5.bind(this)} saveform={this.saveLearn5.bind(this)} learnlibrary={this.state.learn5} />
+
 
      <TotalGamesModal active = {modaltotal1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal1.bind(this)} saveform={this.saveTotal1.bind(this)} totalgames={this.state.student1} />
      <TotalOtherModal active = {modaltotal2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeTotal2.bind(this)} saveform={this.saveTotal2.bind(this)} totalother={this.state.student2} />
@@ -2796,9 +2862,6 @@ render() {
      <SusGovernModal active = {modalsus6} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSus6.bind(this)} saveform={this.saveSustain6.bind(this)} sustain={this.state.sustain6} />
 
 
-     <AcaInternalModal active = {modalaca1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca1.bind(this)} saveform={this.saveAcademic.bind(this)} academic={this.state.academic1} />
-     <AcaExternalModal active = {modalaca2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca2.bind(this)} saveform={this.saveAcademic2.bind(this)} academic={this.state.academic2} />
-
      <SsheSafetylModal active = {modalsshe1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe1.bind(this)} saveform={this.saveSshe.bind(this)} safety={this.state.sshe1} />
      <SsheEnvironlModal active = {modalsshe2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe2.bind(this)} saveform={this.saveSshe2.bind(this)} safety={this.state.sshe2} />
      <SsheHealthlModal active = {modalsshe3} handleClose={this.handleClose} handleInputChange={this.handleInputChangeSshe3.bind(this)} saveform={this.saveSshe3.bind(this)} safety={this.state.sshe3} />
@@ -2811,5 +2874,17 @@ render() {
 
   );
 }
+/**
+      <Col sm={2}>
+        <div className={this.state.showothers ? 'scorebox card' : 'hidden'}>
+          <h4>Performance</h4>
+          <p className="score"></p>
+          <button className="button is-small is-warning"  onClick={e => this.handleAca1(e)} > Edit Internal Academic Performance </button> &nbsp;&nbsp;&nbsp;
+          <button className="button is-small is-info"  onClick={e => this.handleAca2(e)} > Edit External Academic Performance </button> &nbsp;&nbsp;&nbsp;
+        </div>
+      </Col>
+     <AcaInternalModal active = {modalaca1} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca1.bind(this)} saveform={this.saveAcademic.bind(this)} academic={this.state.academic1} />
+     <AcaExternalModal active = {modalaca2} handleClose={this.handleClose} handleInputChange={this.handleInputChangeAca2.bind(this)} saveform={this.saveAcademic2.bind(this)} academic={this.state.academic2} />
+ **/
 
 }

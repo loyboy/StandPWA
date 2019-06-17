@@ -99,14 +99,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Internal Competition? </label>
           <p className=" help"> How many competitions established and practiced internally relative to student population within the school? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_6" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_6 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+            <input className="input is-focused" name="att_6" type="number"
+            placeholder="Enter figure to set Internal Competiton" onChange={handleInputChange}
+            value= {totalgames !== null ? totalgames.att_6 : ''}/>
           </div>
         </div>
 
@@ -114,14 +109,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Internal Competitors? </label>
           <p className=" help"> How many participants in internal sports and games competitions relative to school population interschool as in ‘school group’?</p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_7" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_7 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+              <input className="input is-focused" name="att_7" type="number"
+              placeholder="Enter figure to set Internal Competitors" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_7 : ''}/>
           </div>
         </div>
 
@@ -129,14 +119,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Internal Trophies? </label>
           <p className=" help"> How many trophies are sponsored for internal competitions relative to school population? Trophy is not in terms of material value but symbolic value </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_8" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_8 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+              <input className="input is-focused" name="att_8" type="number"
+              placeholder="Enter figure to set Internal Trophies" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_8 : ''}/>
           </div>
         </div>
 
@@ -144,14 +129,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Local Competitions? </label>
           <p className=" help"> How many local sports and games competitions participation relative to school population? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_9" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_9 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+             <input className="input is-focused" name="att_9" type="number"
+              placeholder="Enter figure to set Local Competitions" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_9 : ''}/>
           </div>
         </div>
 
@@ -159,14 +139,10 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Local Competitiors? </label>
           <p className=" help">How many participants in local sports and games competitions relative to school population? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_10" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_10 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
+             <input className="input is-focused" name="att_10" type="number"
+              placeholder="Enter figure to set Local Competitiors" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_10 : ''}/>
 
-            </select>
-          </div>
           </div>
         </div>
 
@@ -174,14 +150,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> Local Trophies? </label>
           <p className=" help"> How many trophies won in local sports and games competitions relative to school population? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_11" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_11 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+              <input className="input is-focused" name="att_11" type="number"
+              placeholder="Enter figure to set Local Trophies" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_11 : ''}/>
           </div>
         </div>
 
@@ -189,14 +160,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> External Competitions? </label>
           <p className=" help"> How many external sports and games competitions participation relative to school population (state level up) </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_12" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_12 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+              <input className="input is-focused" name="att_12" type="number"
+              placeholder="Enter figure to set External Competitions" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_12 : ''}/>
           </div>
         </div>
 
@@ -204,14 +170,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> External Competitors? </label>
           <p className=" help"> How many participants in external sports and games competitions relative to school population? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_13" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_13 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+              <input className="input is-focused" name="att_13" type="number"
+              placeholder="Enter figure to set External Competitors" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_13 : ''}/>
           </div>
         </div>
 
@@ -219,14 +180,9 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <label className="label"> External Trophies? </label>
           <p className=" help"> How many trophies are won in external sports and games competitions relative to school population (last one year)? </p>
           <div className="control">
-          <div className="select is-large">
-            <select name="att_13" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_13 : ''}>
-              <option value=''>Choose---</option>
-              <option value='1'>Greater than 2</option>
-              <option value='0'>Less than 2</option>
-
-            </select>
-          </div>
+             <input className="input is-focused" name="att_14" type="number"
+              placeholder="Enter figure to set External Trophies" onChange={handleInputChange}
+              value= {totalgames !== null ? totalgames.att_14 : ''}/>
           </div>
         </div>
 
@@ -235,11 +191,10 @@ Is there fulltime officer in charge of sports and games, not just delegated teac
           <p className=" help"> What level would you rate the school sports and games activities and the trophies won? </p>
           <div className="control">
           <div className="select is-large">
-            <select name="att_13" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_14 : ''}>
+            <select name="att_15" onChange={handleInputChange} value= {totalgames !== null ? totalgames.att_15 : ''}>
               <option value=''>Choose---</option>
               <option value='1'>High</option>
               <option value='0'>Weak</option>
-
             </select>
           </div>
           </div>

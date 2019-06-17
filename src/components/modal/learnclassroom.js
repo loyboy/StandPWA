@@ -51,10 +51,10 @@ export default class LearnClassroomModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_3" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_3 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'>less than or equal to 28</option>
+              <option value='4'>less than or equal to 25</option>
               <option value='2'>less than or equal to 30</option>
-              <option value='3'>less than or equal to 35</option>
-              <option value='4'>greather than or equal to 35</option>
+              <option value='1'>less than or equal to 35</option>
+              <option value='0'>greather than or equal to 35 and above</option>
               <option value='0'>None</option>
             </select>
           </div>
@@ -68,9 +68,9 @@ export default class LearnClassroomModal extends React.PureComponent {
           <div className="select is-large">
             <select name="att_4" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_4 : ''}>
               <option value=''>Choose---</option>
-              <option value='1'> >= 0.89</option>
-              <option value='2'> >=62.3 and less than 0.89 </option>
-              <option value='3'>62.3</option>
+              <option value='4'> >= 0.89 meter squared</option>
+              <option value='2'> >= 62.3 and less than 0.89 meter squared</option>
+              <option value='1'> less than 62.3 meter squared</option>
 
             </select>
           </div>
@@ -153,6 +153,22 @@ export default class LearnClassroomModal extends React.PureComponent {
               <option value='4'>Yes</option>
               <option value='2'>Fairly</option>
               <option value='0'>Not quite</option>
+
+            </select>
+          </div>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label"> Furniture? </label>
+          <p className=" help"> Safe and ergonomic? </p>
+          <div className="control">
+          <div className="select is-large">
+            <select name="att_10" onChange={handleInputChange} value= {learnclassroom !== null ? learnclassroom.att_10 : ''}>
+              <option value=''>Choose---</option>
+              <option value='3'>Yes</option>
+              <option value='2'>Okay</option>
+              <option value='1'>Not quite</option>
 
             </select>
           </div>
